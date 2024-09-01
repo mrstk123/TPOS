@@ -16,3 +16,7 @@ User Accounts:
 	UserName: user
 	Password: user123
 	Email: user@tpos.com
+
+
+Dto (Data Transfer Object) is commonly used for classes that represent the data structure for transferring data
+between different layers (like between the API and the client).

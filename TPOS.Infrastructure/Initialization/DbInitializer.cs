@@ -1,14 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using TPOS.Core.Interfaces;
 using Object = TPOS.Core.Models.Object;
 
-namespace TPOS.Infrastructure.DbInitializer
+namespace TPOS.Infrastructure.Initialization
 {
-    public interface IDbInitializer
-    {
-        Task SeedAsync();
-    }
-
     public class DbInitializer : IDbInitializer
     {
         private readonly AppDbContext _context;
@@ -48,7 +44,7 @@ namespace TPOS.Infrastructure.DbInitializer
             {
                 _logger.LogInformation("Seeding Initial Data");
 
-                DateTime _now = DateTime.Now;
+                DateTime _now = DateTime.UtcNow;
 
                 #region Populate Objects
 
