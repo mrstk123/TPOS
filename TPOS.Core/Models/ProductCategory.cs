@@ -7,11 +7,11 @@ namespace TPOS.Core.Models;
 
 public partial class ProductCategory
 {
-    public int ProductCategoryId { get; set; }
+    public int ProductCategoryID { get; set; }
 
-    public int ProductId { get; set; }
+    public int ProductID { get; set; }
 
-    public int CategoryId { get; set; }
+    public int CategoryID { get; set; }
 
     public DateTime CreatedOn { get; set; }
 
@@ -25,9 +25,5 @@ public partial class ProductCategory
 
     public virtual Category Category { get; set; }
 
-    public virtual User CreatedByNavigation { get; set; }
-
     public virtual Product Product { get; set; }
-
-    public virtual User UpdatedByNavigation { get; set; }
 }

@@ -7,7 +7,7 @@ namespace TPOS.Core.Models;
 
 public partial class Company
 {
-    public int CompanyId { get; set; }
+    public int CompanyID { get; set; }
 
     public string CompanyName { get; set; }
 
@@ -28,8 +28,4 @@ public partial class Company
     public bool Active { get; set; }
 
     public virtual ICollection<Branch> Branches { get; set; } = new List<Branch>();
-
-    public virtual User CreatedByNavigation { get; set; }
-
-    public virtual User UpdatedByNavigation { get; set; }
 }

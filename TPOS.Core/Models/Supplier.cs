@@ -7,17 +7,11 @@ namespace TPOS.Core.Models;
 
 public partial class Supplier
 {
-    public int SupplierId { get; set; }
+    public int SupplierID { get; set; }
 
     public string SupplierName { get; set; }
 
-    public string ContactPerson { get; set; }
-
-    public string Email { get; set; }
-
-    public string Phone { get; set; }
-
-    public string Address { get; set; }
+    public int? ContactID { get; set; }
 
     public DateTime CreatedOn { get; set; }
 
@@ -29,9 +23,7 @@ public partial class Supplier
 
     public bool Active { get; set; }
 
-    public virtual User CreatedByNavigation { get; set; }
+    public virtual ContactInfo Contact { get; set; }
 
     public virtual ICollection<Product> Products { get; set; } = new List<Product>();
-
-    public virtual User UpdatedByNavigation { get; set; }
 }

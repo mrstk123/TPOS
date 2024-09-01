@@ -7,11 +7,11 @@ namespace TPOS.Core.Models;
 
 public partial class CurrencyRate
 {
-    public int CurrencyRateId { get; set; }
+    public int CurrencyRateID { get; set; }
 
-    public int BaseCurrencyId { get; set; }
+    public int BaseCurrencyID { get; set; }
 
-    public int ForeignCurrencyId { get; set; }
+    public int ForeignCurrencyID { get; set; }
 
     public decimal Rate { get; set; }
 
@@ -31,9 +31,5 @@ public partial class CurrencyRate
 
     public virtual Object BaseCurrency { get; set; }
 
-    public virtual User CreatedByNavigation { get; set; }
-
     public virtual Object ForeignCurrency { get; set; }
-
-    public virtual User UpdatedByNavigation { get; set; }
 }

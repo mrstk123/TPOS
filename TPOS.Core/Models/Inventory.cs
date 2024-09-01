@@ -7,11 +7,11 @@ namespace TPOS.Core.Models;
 
 public partial class Inventory
 {
-    public int InventoryId { get; set; }
+    public int InventoryID { get; set; }
 
-    public int ProductId { get; set; }
+    public int ProductID { get; set; }
 
-    public int BranchId { get; set; }
+    public int BranchID { get; set; }
 
     public int StockQuantity { get; set; }
 
@@ -27,9 +27,5 @@ public partial class Inventory
 
     public virtual Branch Branch { get; set; }
 
-    public virtual User CreatedByNavigation { get; set; }
-
     public virtual Product Product { get; set; }
-
-    public virtual User UpdatedByNavigation { get; set; }
 }

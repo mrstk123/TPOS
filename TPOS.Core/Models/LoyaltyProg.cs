@@ -7,7 +7,7 @@ namespace TPOS.Core.Models;
 
 public partial class LoyaltyProg
 {
-    public int LoyaltyProgId { get; set; }
+    public int LoyaltyProgID { get; set; }
 
     public string LoyaltyProgName { get; set; }
 
@@ -17,7 +17,7 @@ public partial class LoyaltyProg
 
     public decimal? PointsMultiplier { get; set; }
 
-    public DateOnly? Validity { get; set; }
+    public DateTime? Validity { get; set; }
 
     public DateTime CreatedOn { get; set; }
 
@@ -29,9 +29,5 @@ public partial class LoyaltyProg
 
     public bool Active { get; set; }
 
-    public virtual User CreatedByNavigation { get; set; }
-
     public virtual ICollection<Loyalty> Loyalties { get; set; } = new List<Loyalty>();
-
-    public virtual User UpdatedByNavigation { get; set; }
 }

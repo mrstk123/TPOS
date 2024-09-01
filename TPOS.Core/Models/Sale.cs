@@ -7,19 +7,19 @@ namespace TPOS.Core.Models;
 
 public partial class Sale
 {
-    public int SaleId { get; set; }
+    public int SaleID { get; set; }
 
-    public int StoreId { get; set; }
+    public int BranchID { get; set; }
 
-    public int? CustomerId { get; set; }
+    public int? CustomerID { get; set; }
 
-    public int EmployeeId { get; set; }
+    public int EmployeeID { get; set; }
 
     public DateOnly SaleDate { get; set; }
 
     public TimeOnly SaleTime { get; set; }
 
-    public int SaleCurrencyId { get; set; }
+    public int SaleCurrencyID { get; set; }
 
     public decimal TotalAmount { get; set; }
 
@@ -29,13 +29,13 @@ public partial class Sale
 
     public string ReceiptNumber { get; set; }
 
-    public int StatusId { get; set; }
+    public int StatusID { get; set; }
 
-    public int? TaxId { get; set; }
+    public int? TaxID { get; set; }
 
     public decimal? TaxAmount { get; set; }
 
-    public int? DiscountId { get; set; }
+    public int? DiscountID { get; set; }
 
     public decimal? DiscountAmount { get; set; }
 
@@ -49,11 +49,13 @@ public partial class Sale
 
     public bool Active { get; set; }
 
-    public virtual User CreatedByNavigation { get; set; }
+    public virtual Branch Branch { get; set; }
 
     public virtual Customer Customer { get; set; }
 
     public virtual Discount Discount { get; set; }
+
+    public virtual Employee Employee { get; set; }
 
     public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
 
@@ -63,9 +65,5 @@ public partial class Sale
 
     public virtual Object Status { get; set; }
 
-    public virtual Branch Store { get; set; }
-
-    public virtual Taxis Tax { get; set; }
-
-    public virtual User UpdatedByNavigation { get; set; }
+    public virtual Tax Tax { get; set; }
 }

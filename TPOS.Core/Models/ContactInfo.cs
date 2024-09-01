@@ -7,7 +7,7 @@ namespace TPOS.Core.Models;
 
 public partial class ContactInfo
 {
-    public int ContactId { get; set; }
+    public int ContactID { get; set; }
 
     public string Name { get; set; }
 
@@ -29,11 +29,9 @@ public partial class ContactInfo
 
     public virtual ICollection<Branch> Branches { get; set; } = new List<Branch>();
 
-    public virtual User CreatedByNavigation { get; set; }
-
     public virtual ICollection<Customer> Customers { get; set; } = new List<Customer>();
 
     public virtual ICollection<Employee> Employees { get; set; } = new List<Employee>();
 
-    public virtual User UpdatedByNavigation { get; set; }
+    public virtual ICollection<Supplier> Suppliers { get; set; } = new List<Supplier>();
 }

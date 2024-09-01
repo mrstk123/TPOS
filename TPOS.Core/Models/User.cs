@@ -7,7 +7,7 @@ namespace TPOS.Core.Models;
 
 public partial class User
 {
-    public int UserId { get; set; }
+    public int UserID { get; set; }
 
     public string UserName { get; set; }
 
@@ -25,97 +25,9 @@ public partial class User
 
     public bool Active { get; set; }
 
-    public virtual ICollection<Branch> BranchCreatedByNavigations { get; set; } = new List<Branch>();
+    public virtual ICollection<Customer> Customers { get; set; } = new List<Customer>();
 
-    public virtual ICollection<Branch> BranchUpdatedByNavigations { get; set; } = new List<Branch>();
+    public virtual ICollection<Employee> Employees { get; set; } = new List<Employee>();
 
-    public virtual ICollection<Category> CategoryCreatedByNavigations { get; set; } = new List<Category>();
-
-    public virtual ICollection<Category> CategoryUpdatedByNavigations { get; set; } = new List<Category>();
-
-    public virtual ICollection<Company> CompanyCreatedByNavigations { get; set; } = new List<Company>();
-
-    public virtual ICollection<Company> CompanyUpdatedByNavigations { get; set; } = new List<Company>();
-
-    public virtual ICollection<ContactInfo> ContactInfoCreatedByNavigations { get; set; } = new List<ContactInfo>();
-
-    public virtual ICollection<ContactInfo> ContactInfoUpdatedByNavigations { get; set; } = new List<ContactInfo>();
-
-    public virtual ICollection<CurrencyRate> CurrencyRateCreatedByNavigations { get; set; } = new List<CurrencyRate>();
-
-    public virtual ICollection<CurrencyRate> CurrencyRateUpdatedByNavigations { get; set; } = new List<CurrencyRate>();
-
-    public virtual ICollection<Customer> CustomerCreatedByNavigations { get; set; } = new List<Customer>();
-
-    public virtual ICollection<Customer> CustomerUpdatedByNavigations { get; set; } = new List<Customer>();
-
-    public virtual ICollection<Customer> CustomerUsers { get; set; } = new List<Customer>();
-
-    public virtual ICollection<Discount> DiscountCreatedByNavigations { get; set; } = new List<Discount>();
-
-    public virtual ICollection<Discount> DiscountUpdatedByNavigations { get; set; } = new List<Discount>();
-
-    public virtual ICollection<Employee> EmployeeCreatedByNavigations { get; set; } = new List<Employee>();
-
-    public virtual ICollection<Employee> EmployeeUpdatedByNavigations { get; set; } = new List<Employee>();
-
-    public virtual ICollection<Employee> EmployeeUsers { get; set; } = new List<Employee>();
-
-    public virtual ICollection<Inventory> InventoryCreatedByNavigations { get; set; } = new List<Inventory>();
-
-    public virtual ICollection<Inventory> InventoryUpdatedByNavigations { get; set; } = new List<Inventory>();
-
-    public virtual ICollection<Loyalty> LoyaltyCreatedByNavigations { get; set; } = new List<Loyalty>();
-
-    public virtual ICollection<LoyaltyProg> LoyaltyProgCreatedByNavigations { get; set; } = new List<LoyaltyProg>();
-
-    public virtual ICollection<LoyaltyProg> LoyaltyProgUpdatedByNavigations { get; set; } = new List<LoyaltyProg>();
-
-    public virtual ICollection<Loyalty> LoyaltyUpdatedByNavigations { get; set; } = new List<Loyalty>();
-
-    public virtual ICollection<Object> ObjectCreatedByNavigations { get; set; } = new List<Object>();
-
-    public virtual ICollection<Object> ObjectUpdatedByNavigations { get; set; } = new List<Object>();
-
-    public virtual ICollection<Payment> PaymentCreatedByNavigations { get; set; } = new List<Payment>();
-
-    public virtual ICollection<Payment> PaymentUpdatedByNavigations { get; set; } = new List<Payment>();
-
-    public virtual ICollection<ProductCategory> ProductCategoryCreatedByNavigations { get; set; } = new List<ProductCategory>();
-
-    public virtual ICollection<ProductCategory> ProductCategoryUpdatedByNavigations { get; set; } = new List<ProductCategory>();
-
-    public virtual ICollection<Product> ProductCreatedByNavigations { get; set; } = new List<Product>();
-
-    public virtual ICollection<ProductItem> ProductItemCreatedByNavigations { get; set; } = new List<ProductItem>();
-
-    public virtual ICollection<ProductItem> ProductItemUpdatedByNavigations { get; set; } = new List<ProductItem>();
-
-    public virtual ICollection<Product> ProductUpdatedByNavigations { get; set; } = new List<Product>();
-
-    public virtual ICollection<Role> RoleCreatedByNavigations { get; set; } = new List<Role>();
-
-    public virtual ICollection<Role> RoleUpdatedByNavigations { get; set; } = new List<Role>();
-
-    public virtual ICollection<Sale> SaleCreatedByNavigations { get; set; } = new List<Sale>();
-
-    public virtual ICollection<SaleItem> SaleItemCreatedByNavigations { get; set; } = new List<SaleItem>();
-
-    public virtual ICollection<SaleItem> SaleItemUpdatedByNavigations { get; set; } = new List<SaleItem>();
-
-    public virtual ICollection<Sale> SaleUpdatedByNavigations { get; set; } = new List<Sale>();
-
-    public virtual ICollection<Supplier> SupplierCreatedByNavigations { get; set; } = new List<Supplier>();
-
-    public virtual ICollection<Supplier> SupplierUpdatedByNavigations { get; set; } = new List<Supplier>();
-
-    public virtual ICollection<Taxis> TaxisCreatedByNavigations { get; set; } = new List<Taxis>();
-
-    public virtual ICollection<Taxis> TaxisUpdatedByNavigations { get; set; } = new List<Taxis>();
-
-    public virtual ICollection<UserRole> UserRoleCreatedByNavigations { get; set; } = new List<UserRole>();
-
-    public virtual ICollection<UserRole> UserRoleUpdatedByNavigations { get; set; } = new List<UserRole>();
-
-    public virtual ICollection<UserRole> UserRoleUsers { get; set; } = new List<UserRole>();
+    public virtual ICollection<UserRole> UserRoles { get; set; } = new List<UserRole>();
 }

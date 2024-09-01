@@ -7,13 +7,13 @@ namespace TPOS.Core.Models;
 
 public partial class SaleItem
 {
-    public int SaleItemId { get; set; }
+    public int SaleItemID { get; set; }
 
-    public int SaleId { get; set; }
+    public int SaleID { get; set; }
 
-    public int ProductId { get; set; }
+    public int ProductID { get; set; }
 
-    public int? ProductItemId { get; set; }
+    public int? ProductItemID { get; set; }
 
     public int Quantity { get; set; }
 
@@ -21,11 +21,11 @@ public partial class SaleItem
 
     public decimal TotalPrice { get; set; }
 
-    public int? TaxId { get; set; }
+    public int? TaxID { get; set; }
 
     public decimal? TaxAmount { get; set; }
 
-    public int? DiscountId { get; set; }
+    public int? DiscountID { get; set; }
 
     public decimal? DiscountAmount { get; set; }
 
@@ -39,8 +39,6 @@ public partial class SaleItem
 
     public bool Active { get; set; }
 
-    public virtual User CreatedByNavigation { get; set; }
-
     public virtual Discount Discount { get; set; }
 
     public virtual Product Product { get; set; }
@@ -49,7 +47,5 @@ public partial class SaleItem
 
     public virtual Sale Sale { get; set; }
 
-    public virtual Taxis Tax { get; set; }
-
-    public virtual User UpdatedByNavigation { get; set; }
+    public virtual Tax Tax { get; set; }
 }

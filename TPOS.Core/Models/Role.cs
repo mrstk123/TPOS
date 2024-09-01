@@ -7,7 +7,7 @@ namespace TPOS.Core.Models;
 
 public partial class Role
 {
-    public int RoleId { get; set; }
+    public int RoleID { get; set; }
 
     public string RoleName { get; set; }
 
@@ -22,10 +22,6 @@ public partial class Role
     public int UpdatedBy { get; set; }
 
     public bool Active { get; set; }
-
-    public virtual User CreatedByNavigation { get; set; }
-
-    public virtual User UpdatedByNavigation { get; set; }
 
     public virtual ICollection<UserRole> UserRoles { get; set; } = new List<UserRole>();
 }

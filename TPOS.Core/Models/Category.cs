@@ -7,7 +7,7 @@ namespace TPOS.Core.Models;
 
 public partial class Category
 {
-    public int CategoryId { get; set; }
+    public int CategoryID { get; set; }
 
     public string CategoryName { get; set; }
 
@@ -25,9 +25,5 @@ public partial class Category
 
     public bool Active { get; set; }
 
-    public virtual User CreatedByNavigation { get; set; }
-
     public virtual ICollection<ProductCategory> ProductCategories { get; set; } = new List<ProductCategory>();
-
-    public virtual User UpdatedByNavigation { get; set; }
 }

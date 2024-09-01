@@ -1,0 +1,2 @@
+- Db-First Project
+- Generate Models by Scaffolding

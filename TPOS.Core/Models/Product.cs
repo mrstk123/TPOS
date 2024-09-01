@@ -7,17 +7,17 @@ namespace TPOS.Core.Models;
 
 public partial class Product
 {
-    public int ProductId { get; set; }
+    public int ProductID { get; set; }
 
     public string ProductName { get; set; }
 
     public string ProductDescription { get; set; }
 
-    public int? BrandId { get; set; }
+    public int? BrandID { get; set; }
 
     public string BarCode { get; set; }
 
-    public int? SupplierId { get; set; }
+    public int? SupplierID { get; set; }
 
     public decimal Price { get; set; }
 
@@ -37,8 +37,6 @@ public partial class Product
 
     public virtual Object Brand { get; set; }
 
-    public virtual User CreatedByNavigation { get; set; }
-
     public virtual ICollection<Discount> Discounts { get; set; } = new List<Discount>();
 
     public virtual ICollection<Inventory> Inventories { get; set; } = new List<Inventory>();
@@ -50,6 +48,4 @@ public partial class Product
     public virtual ICollection<SaleItem> SaleItems { get; set; } = new List<SaleItem>();
 
     public virtual Supplier Supplier { get; set; }
-
-    public virtual User UpdatedByNavigation { get; set; }
 }

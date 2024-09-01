@@ -7,15 +7,15 @@ namespace TPOS.Core.Models;
 
 public partial class Branch
 {
-    public int BranchId { get; set; }
+    public int BranchID { get; set; }
 
     public string BranchName { get; set; }
 
     public string Location { get; set; }
 
-    public int CompanyId { get; set; }
+    public int CompanyID { get; set; }
 
-    public int? ContactId { get; set; }
+    public int? ContactID { get; set; }
 
     public DateTime CreatedOn { get; set; }
 
@@ -31,8 +31,6 @@ public partial class Branch
 
     public virtual ContactInfo Contact { get; set; }
 
-    public virtual User CreatedByNavigation { get; set; }
-
     public virtual ICollection<Employee> Employees { get; set; } = new List<Employee>();
 
     public virtual ICollection<Inventory> Inventories { get; set; } = new List<Inventory>();
@@ -40,6 +38,4 @@ public partial class Branch
     public virtual ICollection<ProductItem> ProductItems { get; set; } = new List<ProductItem>();
 
     public virtual ICollection<Sale> Sales { get; set; } = new List<Sale>();
-
-    public virtual User UpdatedByNavigation { get; set; }
 }

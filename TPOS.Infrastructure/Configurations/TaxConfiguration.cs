@@ -8,24 +8,28 @@ using TPOS.Infrastructure;
 
 namespace TPOS.Infrastructure.Configurations
 {
-    public partial class LoyaltyProgConfiguration : IEntityTypeConfiguration<LoyaltyProg>
+    public partial class TaxConfiguration : IEntityTypeConfiguration<Tax>
     {
-        public void Configure(EntityTypeBuilder<LoyaltyProg> entity)
+        public void Configure(EntityTypeBuilder<Tax> entity)
         {
+            entity.HasKey(e => e.TaxID);
+
             entity.Property(e => e.CreatedOn).HasColumnType("datetime");
-            entity.Property(e => e.LoyaltyProgDescription).HasColumnType("text");
-            entity.Property(e => e.LoyaltyProgName)
+            entity.Property(e => e.TaxName)
                 .IsRequired()
                 .HasMaxLength(100)
                 .IsUnicode(false);
-            entity.Property(e => e.PointsMultiplier).HasColumnType("decimal(10, 2)");
-            entity.Property(e => e.PointsPerAmount).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.TaxRate).HasColumnType("decimal(5, 2)");
             entity.Property(e => e.UpdatedOn).HasColumnType("datetime");
-            entity.Property(e => e.Validity).HasColumnType("datetime");
+
+            entity.HasOne(d => d.TaxType).WithMany(p => p.Taxes)
+                .HasForeignKey(d => d.TaxTypeID)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Taxes_Objects");
 
             OnConfigurePartial(entity);
         }
 
-        partial void OnConfigurePartial(EntityTypeBuilder<LoyaltyProg> entity);
+        partial void OnConfigurePartial(EntityTypeBuilder<Tax> entity);
     }
 }

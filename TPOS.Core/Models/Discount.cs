@@ -7,15 +7,15 @@ namespace TPOS.Core.Models;
 
 public partial class Discount
 {
-    public int DiscountId { get; set; }
+    public int DiscountID { get; set; }
 
     public string DiscountDescription { get; set; }
 
-    public int ProductId { get; set; }
+    public int ProductID { get; set; }
 
     public string DiscountCode { get; set; }
 
-    public int DiscountTypeId { get; set; }
+    public int DiscountTypeID { get; set; }
 
     public decimal DiscountValue { get; set; }
 
@@ -33,8 +33,6 @@ public partial class Discount
 
     public bool Active { get; set; }
 
-    public virtual User CreatedByNavigation { get; set; }
-
     public virtual Object DiscountType { get; set; }
 
     public virtual Product Product { get; set; }
@@ -42,6 +40,4 @@ public partial class Discount
     public virtual ICollection<SaleItem> SaleItems { get; set; } = new List<SaleItem>();
 
     public virtual ICollection<Sale> Sales { get; set; } = new List<Sale>();
-
-    public virtual User UpdatedByNavigation { get; set; }
 }

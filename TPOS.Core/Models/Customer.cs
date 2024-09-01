@@ -7,11 +7,11 @@ namespace TPOS.Core.Models;
 
 public partial class Customer
 {
-    public int CustomerId { get; set; }
+    public int CustomerID { get; set; }
 
-    public int? UserId { get; set; }
+    public int? UserID { get; set; }
 
-    public int ContactId { get; set; }
+    public int ContactID { get; set; }
 
     public DateOnly? DateOfBirth { get; set; }
 
@@ -27,13 +27,9 @@ public partial class Customer
 
     public virtual ContactInfo Contact { get; set; }
 
-    public virtual User CreatedByNavigation { get; set; }
-
     public virtual ICollection<Loyalty> Loyalties { get; set; } = new List<Loyalty>();
 
     public virtual ICollection<Sale> Sales { get; set; } = new List<Sale>();
-
-    public virtual User UpdatedByNavigation { get; set; }
 
     public virtual User User { get; set; }
 }

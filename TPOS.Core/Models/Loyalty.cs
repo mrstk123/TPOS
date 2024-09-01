@@ -7,15 +7,15 @@ namespace TPOS.Core.Models;
 
 public partial class Loyalty
 {
-    public int LoyaltyId { get; set; }
+    public int LoyaltyID { get; set; }
 
-    public int CustomerId { get; set; }
+    public int CustomerID { get; set; }
 
-    public int LoyaltyProgId { get; set; }
+    public int LoyaltyProgID { get; set; }
 
     public int PointsEarned { get; set; }
 
-    public int MembershipLevelId { get; set; }
+    public int MembershipLevelID { get; set; }
 
     public DateTime CreatedOn { get; set; }
 
@@ -27,13 +27,9 @@ public partial class Loyalty
 
     public bool Active { get; set; }
 
-    public virtual User CreatedByNavigation { get; set; }
-
     public virtual Customer Customer { get; set; }
 
     public virtual LoyaltyProg LoyaltyProg { get; set; }
 
     public virtual Object MembershipLevel { get; set; }
-
-    public virtual User UpdatedByNavigation { get; set; }
 }

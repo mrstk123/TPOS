@@ -7,19 +7,19 @@ namespace TPOS.Core.Models;
 
 public partial class Payment
 {
-    public int PaymentId { get; set; }
+    public int PaymentID { get; set; }
 
-    public int SaleId { get; set; }
+    public int SaleID { get; set; }
 
     public decimal PaymentAmount { get; set; }
 
-    public int PaymentCurrencyId { get; set; }
+    public int PaymentCurrencyID { get; set; }
 
     public DateOnly PaymentDate { get; set; }
 
     public TimeOnly PaymentTime { get; set; }
 
-    public int PaymentTypeId { get; set; }
+    public int PaymentTypeID { get; set; }
 
     public DateTime CreatedOn { get; set; }
 
@@ -31,13 +31,9 @@ public partial class Payment
 
     public bool Active { get; set; }
 
-    public virtual User CreatedByNavigation { get; set; }
-
     public virtual Object PaymentCurrency { get; set; }
 
     public virtual Object PaymentType { get; set; }
 
     public virtual Sale Sale { get; set; }
-
-    public virtual User UpdatedByNavigation { get; set; }
 }

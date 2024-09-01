@@ -7,11 +7,11 @@ namespace TPOS.Core.Models;
 
 public partial class ProductItem
 {
-    public int ProductItemId { get; set; }
+    public int ProductItemID { get; set; }
 
-    public int ProductId { get; set; }
+    public int ProductID { get; set; }
 
-    public int BranchId { get; set; }
+    public int BranchID { get; set; }
 
     public string SerialNumber { get; set; }
 
@@ -19,7 +19,7 @@ public partial class ProductItem
 
     public string BatchNumber { get; set; }
 
-    public int StatusId { get; set; }
+    public int StatusID { get; set; }
 
     public DateTime? PurchaseDate { get; set; }
 
@@ -37,13 +37,9 @@ public partial class ProductItem
 
     public virtual Branch Branch { get; set; }
 
-    public virtual User CreatedByNavigation { get; set; }
-
     public virtual Product Product { get; set; }
 
     public virtual ICollection<SaleItem> SaleItems { get; set; } = new List<SaleItem>();
 
     public virtual Object Status { get; set; }
-
-    public virtual User UpdatedByNavigation { get; set; }
 }

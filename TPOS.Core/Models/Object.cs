@@ -7,7 +7,7 @@ namespace TPOS.Core.Models;
 
 public partial class Object
 {
-    public int ObjId { get; set; }
+    public int ObjID { get; set; }
 
     public string ObjType { get; set; }
 
@@ -33,8 +33,6 @@ public partial class Object
 
     public bool Active { get; set; }
 
-    public virtual User CreatedByNavigation { get; set; }
-
     public virtual ICollection<CurrencyRate> CurrencyRateBaseCurrencies { get; set; } = new List<CurrencyRate>();
 
     public virtual ICollection<CurrencyRate> CurrencyRateForeignCurrencies { get; set; } = new List<CurrencyRate>();
@@ -59,7 +57,5 @@ public partial class Object
 
     public virtual ICollection<Sale> SaleStatuses { get; set; } = new List<Sale>();
 
-    public virtual ICollection<Taxis> Taxes { get; set; } = new List<Taxis>();
-
-    public virtual User UpdatedByNavigation { get; set; }
+    public virtual ICollection<Tax> Taxes { get; set; } = new List<Tax>();
 }

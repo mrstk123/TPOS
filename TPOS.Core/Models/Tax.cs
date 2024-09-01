@@ -5,15 +5,15 @@ using System.Collections.Generic;
 
 namespace TPOS.Core.Models;
 
-public partial class Taxis
+public partial class Tax
 {
-    public int TaxId { get; set; }
+    public int TaxID { get; set; }
 
-    public byte[] TaxName { get; set; }
+    public string TaxName { get; set; }
 
     public decimal TaxRate { get; set; }
 
-    public int TaxTypeId { get; set; }
+    public int TaxTypeID { get; set; }
 
     public DateTime CreatedOn { get; set; }
 
@@ -25,13 +25,9 @@ public partial class Taxis
 
     public bool Active { get; set; }
 
-    public virtual User CreatedByNavigation { get; set; }
-
     public virtual ICollection<SaleItem> SaleItems { get; set; } = new List<SaleItem>();
 
     public virtual ICollection<Sale> Sales { get; set; } = new List<Sale>();
 
     public virtual Object TaxType { get; set; }
-
-    public virtual User UpdatedByNavigation { get; set; }
 }
