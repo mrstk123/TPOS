@@ -13,6 +13,10 @@ public partial class User
 
     public string PasswordHash { get; set; }
 
+    public string PasswordSalt { get; set; }
+
+    public DateTime? Validity { get; set; }
+
     public string Email { get; set; }
 
     public DateTime CreatedOn { get; set; }

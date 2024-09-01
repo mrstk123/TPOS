@@ -20,13 +20,18 @@ namespace TPOS.Infrastructure.Configurations
                 .IsUnicode(false);
             entity.Property(e => e.PasswordHash)
                 .IsRequired()
-                .HasMaxLength(100)
+                .HasMaxLength(128)
+                .IsUnicode(false);
+            entity.Property(e => e.PasswordSalt)
+                .IsRequired()
+                .HasMaxLength(128)
                 .IsUnicode(false);
             entity.Property(e => e.UpdatedOn).HasColumnType("datetime");
             entity.Property(e => e.UserName)
                 .IsRequired()
                 .HasMaxLength(64)
                 .IsUnicode(false);
+            entity.Property(e => e.Validity).HasColumnType("datetime");
 
             OnConfigurePartial(entity);
         }

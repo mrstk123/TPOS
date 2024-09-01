@@ -1,2 +1,18 @@
 - Db-First Project
 - Generate Models by Scaffolding
+- Seed User Data in Db First
+
+
+
+User Accounts:
+	UserName: sysadmin
+	Password: sysadmin123
+	Email: sysadmin@tpos.com
+
+	UserName: admin
+	Password: admin123
+	Email: admin@tpos.com
+
+	UserName: user
+	Password: user123
+	Email: user@tpos.com
