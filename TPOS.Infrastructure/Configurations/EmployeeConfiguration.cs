@@ -12,6 +12,8 @@ namespace TPOS.Infrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<Employee> entity)
         {
+            entity.HasIndex(e => e.UserID, "IX_Employees").IsUnique();
+
             entity.Property(e => e.CreatedOn).HasColumnType("datetime");
             entity.Property(e => e.UpdatedOn).HasColumnType("datetime");
 
@@ -35,8 +37,8 @@ namespace TPOS.Infrastructure.Configurations
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Employees_Objects");
 
-            entity.HasOne(d => d.User).WithMany(p => p.Employees)
-                .HasForeignKey(d => d.UserID)
+            entity.HasOne(d => d.User).WithOne(p => p.Employee)
+                .HasForeignKey<Employee>(d => d.UserID)
                 .HasConstraintName("FK_Employees_Users");
 
             OnConfigurePartial(entity);
