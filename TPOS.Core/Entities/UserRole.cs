@@ -3,17 +3,15 @@
 using System;
 using System.Collections.Generic;
 
-namespace TPOS.Core.Models;
+namespace TPOS.Core.Entities;
 
-public partial class Inventory
+public partial class UserRole
 {
-    public int InventoryID { get; set; }
+    public int UserRoleID { get; set; }
 
-    public int ProductID { get; set; }
+    public int UserID { get; set; }
 
-    public int BranchID { get; set; }
-
-    public int StockQuantity { get; set; }
+    public int RoleID { get; set; }
 
     public DateTime CreatedOn { get; set; }
 
@@ -25,7 +23,7 @@ public partial class Inventory
 
     public bool Active { get; set; }
 
-    public virtual Branch Branch { get; set; }
+    public virtual Role Role { get; set; }
 
-    public virtual Product Product { get; set; }
+    public virtual User User { get; set; }
 }

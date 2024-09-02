@@ -3,25 +3,17 @@
 using System;
 using System.Collections.Generic;
 
-namespace TPOS.Core.Models;
+namespace TPOS.Core.Entities;
 
-public partial class Discount
+public partial class Tax
 {
-    public int DiscountID { get; set; }
+    public int TaxID { get; set; }
 
-    public string DiscountDescription { get; set; }
+    public string TaxName { get; set; }
 
-    public int ProductID { get; set; }
+    public decimal TaxRate { get; set; }
 
-    public string DiscountCode { get; set; }
-
-    public int DiscountTypeID { get; set; }
-
-    public decimal DiscountValue { get; set; }
-
-    public DateTime StartDate { get; set; }
-
-    public DateTime? EndDate { get; set; }
+    public int TaxTypeID { get; set; }
 
     public DateTime CreatedOn { get; set; }
 
@@ -33,11 +25,9 @@ public partial class Discount
 
     public bool Active { get; set; }
 
-    public virtual Object DiscountType { get; set; }
-
-    public virtual Product Product { get; set; }
-
     public virtual ICollection<SaleItem> SaleItems { get; set; } = new List<SaleItem>();
 
     public virtual ICollection<Sale> Sales { get; set; } = new List<Sale>();
+
+    public virtual Object TaxType { get; set; }
 }

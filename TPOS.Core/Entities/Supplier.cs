@@ -3,15 +3,15 @@
 using System;
 using System.Collections.Generic;
 
-namespace TPOS.Core.Models;
+namespace TPOS.Core.Entities;
 
-public partial class ProductCategory
+public partial class Supplier
 {
-    public int ProductCategoryID { get; set; }
+    public int SupplierID { get; set; }
 
-    public int ProductID { get; set; }
+    public string SupplierName { get; set; }
 
-    public int CategoryID { get; set; }
+    public int? ContactID { get; set; }
 
     public DateTime CreatedOn { get; set; }
 
@@ -23,7 +23,7 @@ public partial class ProductCategory
 
     public bool Active { get; set; }
 
-    public virtual Category Category { get; set; }
+    public virtual ContactInfo Contact { get; set; }
 
-    public virtual Product Product { get; set; }
+    public virtual ICollection<Product> Products { get; set; } = new List<Product>();
 }

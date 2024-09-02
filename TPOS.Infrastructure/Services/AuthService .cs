@@ -6,7 +6,7 @@ using System.Security.Claims;
 using System.Text;
 using TPOS.Core.Dtos;
 using TPOS.Core.Interfaces;
-using TPOS.Core.Models;
+using TPOS.Core.Entities;
 
 namespace TPOS.Infrastructure.Services
 {

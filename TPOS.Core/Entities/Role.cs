@@ -3,21 +3,15 @@
 using System;
 using System.Collections.Generic;
 
-namespace TPOS.Core.Models;
+namespace TPOS.Core.Entities;
 
-public partial class User
+public partial class Role
 {
-    public int UserID { get; set; }
+    public int RoleID { get; set; }
 
-    public string UserName { get; set; }
+    public string RoleName { get; set; }
 
-    public byte[] PasswordHash { get; set; }
-
-    public byte[] PasswordSalt { get; set; }
-
-    public DateTime? Validity { get; set; }
-
-    public string Email { get; set; }
+    public string RoleDescription { get; set; }
 
     public DateTime CreatedOn { get; set; }
 
@@ -28,10 +22,6 @@ public partial class User
     public int UpdatedBy { get; set; }
 
     public bool Active { get; set; }
-
-    public virtual Customer Customer { get; set; }
-
-    public virtual Employee Employee { get; set; }
 
     public virtual ICollection<UserRole> UserRoles { get; set; } = new List<UserRole>();
 }

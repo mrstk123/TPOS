@@ -1,7 +1,7 @@
 - Db-First Project
 - Generate Models by Scaffolding
 - Seed User Data in Db First
-
+- UoW (Unit of Work) + Repository Pattern
 
 
 User Accounts:

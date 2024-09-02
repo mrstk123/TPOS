@@ -3,15 +3,17 @@
 using System;
 using System.Collections.Generic;
 
-namespace TPOS.Core.Models;
+namespace TPOS.Core.Entities;
 
-public partial class Supplier
+public partial class Customer
 {
-    public int SupplierID { get; set; }
+    public int CustomerID { get; set; }
 
-    public string SupplierName { get; set; }
+    public int? UserID { get; set; }
 
-    public int? ContactID { get; set; }
+    public int ContactID { get; set; }
+
+    public DateOnly? DateOfBirth { get; set; }
 
     public DateTime CreatedOn { get; set; }
 
@@ -25,5 +27,9 @@ public partial class Supplier
 
     public virtual ContactInfo Contact { get; set; }
 
-    public virtual ICollection<Product> Products { get; set; } = new List<Product>();
+    public virtual ICollection<Loyalty> Loyalties { get; set; } = new List<Loyalty>();
+
+    public virtual ICollection<Sale> Sales { get; set; } = new List<Sale>();
+
+    public virtual User User { get; set; }
 }

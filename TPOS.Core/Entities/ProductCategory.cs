@@ -3,15 +3,15 @@
 using System;
 using System.Collections.Generic;
 
-namespace TPOS.Core.Models;
+namespace TPOS.Core.Entities;
 
-public partial class UserRole
+public partial class ProductCategory
 {
-    public int UserRoleID { get; set; }
+    public int ProductCategoryID { get; set; }
 
-    public int UserID { get; set; }
+    public int ProductID { get; set; }
 
-    public int RoleID { get; set; }
+    public int CategoryID { get; set; }
 
     public DateTime CreatedOn { get; set; }
 
@@ -23,7 +23,7 @@ public partial class UserRole
 
     public bool Active { get; set; }
 
-    public virtual Role Role { get; set; }
+    public virtual Category Category { get; set; }
 
-    public virtual User User { get; set; }
+    public virtual Product Product { get; set; }
 }

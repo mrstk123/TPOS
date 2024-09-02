@@ -3,19 +3,23 @@
 using System;
 using System.Collections.Generic;
 
-namespace TPOS.Core.Models;
+namespace TPOS.Core.Entities;
 
-public partial class Branch
+public partial class Employee
 {
+    public int EmployeeID { get; set; }
+
+    public int? UserID { get; set; }
+
     public int BranchID { get; set; }
 
-    public string BranchName { get; set; }
+    public int ContactID { get; set; }
 
-    public string Location { get; set; }
+    public int PositionID { get; set; }
 
-    public int CompanyID { get; set; }
+    public int DepartmentID { get; set; }
 
-    public int? ContactID { get; set; }
+    public DateOnly? HireDate { get; set; }
 
     public DateTime CreatedOn { get; set; }
 
@@ -27,15 +31,15 @@ public partial class Branch
 
     public bool Active { get; set; }
 
-    public virtual Company Company { get; set; }
+    public virtual Branch Branch { get; set; }
 
     public virtual ContactInfo Contact { get; set; }
 
-    public virtual ICollection<Employee> Employees { get; set; } = new List<Employee>();
+    public virtual Object Department { get; set; }
 
-    public virtual ICollection<Inventory> Inventories { get; set; } = new List<Inventory>();
-
-    public virtual ICollection<ProductItem> ProductItems { get; set; } = new List<ProductItem>();
+    public virtual Object Position { get; set; }
 
     public virtual ICollection<Sale> Sales { get; set; } = new List<Sale>();
+
+    public virtual User User { get; set; }
 }

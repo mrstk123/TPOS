@@ -3,17 +3,19 @@
 using System;
 using System.Collections.Generic;
 
-namespace TPOS.Core.Models;
+namespace TPOS.Core.Entities;
 
-public partial class Category
+public partial class Company
 {
-    public int CategoryID { get; set; }
+    public int CompanyID { get; set; }
 
-    public string CategoryName { get; set; }
+    public string CompanyName { get; set; }
 
-    public string CategoryDescription { get; set; }
+    public string CompanyAddress { get; set; }
 
-    public string CategoryImagePath { get; set; }
+    public string CompanyPhone { get; set; }
+
+    public string CompanyEmail { get; set; }
 
     public DateTime CreatedOn { get; set; }
 
@@ -25,5 +27,5 @@ public partial class Category
 
     public bool Active { get; set; }
 
-    public virtual ICollection<ProductCategory> ProductCategories { get; set; } = new List<ProductCategory>();
+    public virtual ICollection<Branch> Branches { get; set; } = new List<Branch>();
 }
