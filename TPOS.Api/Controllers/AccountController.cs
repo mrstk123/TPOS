@@ -7,7 +7,6 @@ namespace TPOS.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [ValidationActionFilter]
     public class AccountController : ControllerBase
     {
         private readonly IAuthService _authService;
@@ -15,6 +14,13 @@ namespace TPOS.Api.Controllers
         public AccountController(IAuthService authService)
         {
             _authService = authService;
+        }
+
+        [HttpGet("GetUsers")]
+        public async Task<IActionResult> GetUsers()
+        {
+            var users = await _authService.GetUsersAsync();
+            return Ok(users);
         }
 
         [HttpPost("register")]

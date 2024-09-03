@@ -26,6 +26,12 @@ namespace TPOS.Infrastructure.Services
             _unitOfWork = unitOfWork;
         }
 
+        public async Task<IEnumerable<User>> GetUsersAsync()
+        {
+            var users = await _unitOfWork.UserRepository.GetAllAsync();
+            return users;
+        }
+
         public async Task<RegisterResponse> RegisterAsync(RegisterRequestDto registerRequestDto)
         {
             // Check if the user already exists
