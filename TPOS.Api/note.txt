@@ -5,6 +5,8 @@
 - Direct Use of UnitOfWork and Repositories in Controllers without using Services Layer (under Infrastructure Project)
 	but AccountController use the Service layer (does not use UoW + Repository directly) and call AuthService that 
 	encapsulates the business logic and interact with the repositories through the UnitOfWork.
+- Can use entities as parmeters in API methods by excluding navigation properties in serialization and deserialization (Ref Vessel)
+- 
 
 User Accounts:
 	UserName: sysadmin

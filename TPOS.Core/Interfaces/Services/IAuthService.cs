@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TPOS.Core.Dtos;
-using TPOS.Core.Entities;
+using TPOS.Core.Entities.Generated;
 
 namespace TPOS.Core.Interfaces.Services
 {

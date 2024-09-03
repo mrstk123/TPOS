@@ -5,7 +5,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using TPOS.Core.Dtos;
-using TPOS.Core.Entities;
+using TPOS.Core.Entities.Generated;
 using TPOS.Core.Interfaces;
 using TPOS.Core.Interfaces.Services;
 
