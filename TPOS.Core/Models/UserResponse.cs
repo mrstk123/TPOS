@@ -1,7 +1,6 @@
-﻿
-namespace TPOS.Core.Dtos
+﻿namespace TPOS.Core.Models
 {
-    public class UserDto
+    public class UserResponse
     {
         public int UserID { get; set; }
         public string UserName { get; set; }

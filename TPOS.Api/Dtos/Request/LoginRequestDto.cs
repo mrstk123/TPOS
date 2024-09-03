@@ -1,7 +1,6 @@
-﻿
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace TPOS.Core.Dtos
+namespace TPOS.Api.Dtos.Request
 {
     public class LoginRequestDto
     {

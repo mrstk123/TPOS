@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using TPOS.Core.Interfaces.Services;
-using TPOS.Infrastructure;
+using TPOS.Infrastructure.Data;
 using TPOS.Infrastructure.Initialization;
 
 var builder = WebApplication.CreateBuilder(args);

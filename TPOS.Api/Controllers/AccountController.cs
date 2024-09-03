@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TPOS.Api.Filters;
-using TPOS.Core.Dtos;
+using TPOS.Api.Dtos.Request;
 using TPOS.Core.Interfaces.Services;
 
 namespace TPOS.Api.Controllers
@@ -32,7 +31,7 @@ namespace TPOS.Api.Controllers
             //}
 
             registerRequestDto.UserName = registerRequestDto.UserName.ToLower();
-            var response = await _authService.RegisterAsync(registerRequestDto);
+            var response = await _authService.RegisterAsync(registerRequestDto.UserName, registerRequestDto.Password, registerRequestDto.Email);
 
             if (response.Success)
             {

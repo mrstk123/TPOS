@@ -1,4 +1,4 @@
-﻿namespace TPOS.Core.Dtos
+﻿namespace TPOS.Core.Models
 {
     public class RegisterResponse
     {

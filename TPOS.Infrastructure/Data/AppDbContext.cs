@@ -7,7 +7,7 @@ using TPOS.Core.Entities.Generated;
 using Object = TPOS.Core.Entities.Generated.Object;
 #nullable disable
 
-namespace TPOS.Infrastructure;
+namespace TPOS.Infrastructure.Data;
 
 public partial class AppDbContext : DbContext
 {

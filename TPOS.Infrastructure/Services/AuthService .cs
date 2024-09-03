@@ -4,9 +4,9 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using TPOS.Core.Dtos;
 using TPOS.Core.Entities.Generated;
 using TPOS.Core.Interfaces;
+using TPOS.Core.Models;
 using TPOS.Core.Interfaces.Services;
 
 namespace TPOS.Infrastructure.Services
@@ -32,11 +32,11 @@ namespace TPOS.Infrastructure.Services
             return users;
         }
 
-        public async Task<RegisterResponse> RegisterAsync(RegisterRequestDto registerRequestDto)
+        public async Task<RegisterResponse> RegisterAsync(string userName, string password, string? email)
         {
             // Check if the user already exists
-            // var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.UserName == registerRequestDto.UserName);
-            var existingUser = await _unitOfWork.UserRepository.FindFirstOrDefaultAsync(u => u.UserName == registerRequestDto.UserName);
+            // var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.UserName == userName);
+            var existingUser = await _unitOfWork.UserRepository.FindFirstOrDefaultAsync(u => u.UserName == userName);
             if (existingUser != null)
             {
                 return new RegisterResponse
@@ -47,15 +47,15 @@ namespace TPOS.Infrastructure.Services
             }
 
             // Hash the password
-            CreatePasswordHash(registerRequestDto.Password, out byte[] passwordHash, out byte[] passwordSalt);
+            CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
 
             // Create a new user
             var newUser = new User
             {
-                UserName = registerRequestDto.UserName,
+                UserName = userName,
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt,
-                Email = registerRequestDto.Email,
+                Email = email,
                 // Validity = DateTime.UtcNow.AddMinutes(30)
             };
 
@@ -114,7 +114,7 @@ namespace TPOS.Infrastructure.Services
             {
                 Success = true,
                 Token = token,
-                User = new UserDto
+                User = new UserResponse
                 {
                     UserID = user.UserID,
                     UserName = user.UserName,

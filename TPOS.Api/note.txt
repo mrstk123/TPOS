@@ -5,8 +5,10 @@
 - Direct Use of UnitOfWork and Repositories in Controllers without using Services Layer (under Infrastructure Project)
 	but AccountController use the Service layer (does not use UoW + Repository directly) and call AuthService that 
 	encapsulates the business logic and interact with the repositories through the UnitOfWork.
-- Can use entities as parmeters in API methods by excluding navigation properties in serialization and deserialization (Ref Vessel)
-- 
+- Can use entities as parmeters in API methods by excluding navigation properties in serialization and deserialization
+  and if need to customize entities, write DTOs.
+  Recommendation: Use DTOs (do not use entities in API methods) for complex applications
+  where you need clear separation and flexibility in handling data across different layers. 
 
 User Accounts:
 	UserName: sysadmin
@@ -24,3 +26,7 @@ User Accounts:
 
 Dto (Data Transfer Object) is commonly used for classes that represent the data structure for transferring data
 between different layers (like between the API and the client).
+
+C# does not support inheritance between entity classes and DTOs directly due to the nature of how these are typically used
+(DTOs being designed to decouple the domain model from the API surface)
+*** You generally cannot and should not directly inherit from entities in your DTOs to avoid redefining properties

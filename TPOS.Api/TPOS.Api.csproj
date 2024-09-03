@@ -17,4 +17,8 @@
     <ProjectReference Include="..\TPOS.Application\TPOS.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Dtos\Response\" />
+  </ItemGroup>
+
 </Project>
