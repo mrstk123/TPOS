@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using TPOS.Core.Interfaces;
+using TPOS.Core.Interfaces.Services;
+using TPOS.Infrastructure.Data;
 using TPOS.Infrastructure.Services;
 
 namespace TPOS.Infrastructure.Initialization
@@ -10,7 +12,7 @@ namespace TPOS.Infrastructure.Initialization
         {
             services.AddScoped<IDbInitializer, DbInitializer>();
             services.AddScoped<IAuthService, AuthService>();
-            // services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             return services;
         }

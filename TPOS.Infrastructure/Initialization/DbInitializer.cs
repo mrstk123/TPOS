@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using TPOS.Core.Interfaces;
+using TPOS.Core.Interfaces.Services;
 using Object = TPOS.Core.Entities.Object;
 
 namespace TPOS.Infrastructure.Initialization

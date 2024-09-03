@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TPOS.Core.Interfaces
+namespace TPOS.Core.Interfaces.Services
 {
     public interface IDbInitializer
     {

@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TPOS.Api.Filters;
 using TPOS.Core.Dtos;
-using TPOS.Core.Interfaces;
+using TPOS.Core.Interfaces.Services;
 
 namespace TPOS.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ValidationActionFilter]
     public class AccountController : ControllerBase
     {
         private readonly IAuthService _authService;
@@ -18,13 +20,13 @@ namespace TPOS.Api.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterRequestDto registerRequestDto)
         {
-            //if (!ModelState.IsValid)
+            //if (!ModelState.IsValid) // Comment because ActionFilter is defined globally and used at Controller level
             //{
             //    return BadRequest(ModelState);
             //}
 
             registerRequestDto.UserName = registerRequestDto.UserName.ToLower();
-            var response = await _authService.Register(registerRequestDto);
+            var response = await _authService.RegisterAsync(registerRequestDto);
 
             if (response.Success)
             {
@@ -39,7 +41,7 @@ namespace TPOS.Api.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginRequestDto userLoginDto)
         {
-            var result = await _authService.Login(userLoginDto.UserName.ToLower(), userLoginDto.Password);
+            var result = await _authService.LoginAsync(userLoginDto.UserName.ToLower(), userLoginDto.Password);
 
             if (!result.Success)
             {

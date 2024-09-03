@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using TPOS.Core.Interfaces;
+using TPOS.Core.Interfaces.Services;
 using TPOS.Infrastructure;
 using TPOS.Infrastructure.Initialization;
 
