@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using TPOS.Core.Entities.Generated;
 using TPOS.Core.Interfaces.Repositories;
 
-namespace TPOS.Infrastructure.Data
+namespace TPOS.Infrastructure.Data.Repositories
 {
-    public class CustomerRepository : Repository<Customer>, ICustomerRepository
+    public class ContactInfoRepository : Repository<ContactInfo>, IContactInfoRepository
     {
-        public CustomerRepository(AppDbContext context) : base(context)
+        public ContactInfoRepository(AppDbContext context) : base(context)
         {
         }
 

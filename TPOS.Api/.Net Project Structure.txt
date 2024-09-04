@@ -1,0 +1,56 @@
+Clean architectural pattern
+
+Api Project - This project should primarily focus on API controllers and handling HTTP requests. 
+
+Core Project: This project is intended to hold the core business logic, domain models, 
+and service contracts.
+
+Infrastructure Project - This project is responsible for implementing the interfaces defined in the Core project.
+It handles details such as data access, external services, and other infrastructure concerns.
+(store EF Core Configurations and AppDbContext,DbInitializer, Repositories, Service Implementations and External Service Integrations)
+
+
+Or
+
+API Project: This is where you define the entry points of your application, such as controllers, filters, and other components that directly handle HTTP requests and responses. The API project is usually responsible for interacting with the outside world.
+Core Project: This project typically contains the business logic, domain models, service interfaces, and any shared DTOs (Data Transfer Objects). It is independent of infrastructure concerns.
+Infra Project: This project deals with infrastructure concerns, such as data access (e.g., Entity Framework DbContext), external services, repositories, and any other implementations that depend on external systems.
+
+
+
+Role of the Infrastructure Project
+1. EF Core Configurations and AppDbContext:
+
+AppDbContext: This is where you define your Entity Framework Core DbContext. It includes the configuration for connecting to the database and the DbSets for your entities.
+EF Core Configurations: This includes configurations for the database provider (e.g., SQL Server, PostgreSQL), connection strings, and any additional EF Core configuration such as Fluent API configurations or migrations.
+
+2. Repository Implementations:
+
+Repositories: Implement repository patterns if you use them. Repositories abstract the data access layer and interact with the DbContext.
+
+3. Service Implementations:
+
+Concrete Services: Implement the interfaces defined in the Core project. This includes business logic services such as AuthService.
+
+4. External Service Integrations:
+
+Third-party Integrations: Include configurations and implementations for integrating with external services, such as payment gateways, email services, or other APIs.
+
+5. Configuration and Setup:
+
+Configurations: Any setup code related to the infrastructure setup, such as setting up dependency injection or configuring services.
+
+Example:
+public static class ServiceCollectionExtensions
+{
+    public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddDbContext<AppDbContext>(options =>
+            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+
+        services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<IUserRepository, UserRepository>();
+
+        return services;
+    }
+}

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using TPOS.Core.Entities.Generated;
 using TPOS.Core.Interfaces.Repositories;
 
-namespace TPOS.Infrastructure.Data
+namespace TPOS.Infrastructure.Data.Repositories
 {
     public class UserRoleRepository : Repository<UserRole>, IUserRoleRepository
     {

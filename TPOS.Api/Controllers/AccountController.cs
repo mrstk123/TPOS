@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using TPOS.Api.Dtos.Request;
+using TPOS.Api.Dtos.Response;
 using TPOS.Core.Interfaces.Services;
 
 namespace TPOS.Api.Controllers
@@ -9,17 +11,20 @@ namespace TPOS.Api.Controllers
     public class AccountController : ControllerBase
     {
         private readonly IAuthService _authService;
+        private readonly IMapper _mapper;
 
-        public AccountController(IAuthService authService)
+        public AccountController(IAuthService authService, IMapper mapper)
         {
             _authService = authService;
+            _mapper = mapper;
         }
 
         [HttpGet("GetUsers")]
         public async Task<IActionResult> GetUsers()
         {
             var users = await _authService.GetUsersAsync();
-            return Ok(users);
+            var userDtos = _mapper.Map<IEnumerable<UserResponseDto>>(users);
+            return Ok(userDtos);
         }
 
         [HttpPost("register")]

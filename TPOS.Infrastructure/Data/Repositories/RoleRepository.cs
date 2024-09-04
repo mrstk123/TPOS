@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using TPOS.Core.Entities.Generated;
 using TPOS.Core.Interfaces.Repositories;
 
-namespace TPOS.Infrastructure.Data
+namespace TPOS.Infrastructure.Data.Repositories
 {
-    public class UserRepository : Repository<User>, IUserRepository
+    public class RoleRepository : Repository<Role>, IRoleRepository
     {
-        public UserRepository(AppDbContext context) : base(context)
+        public RoleRepository(AppDbContext context) : base(context)
         {
         }
 

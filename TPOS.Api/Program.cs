@@ -1,8 +1,11 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System.Text;
+using TPOS.Api.MappingProfiles;
 using TPOS.Core.Interfaces.Services;
+using TPOS.Core.Utilities;
 using TPOS.Infrastructure.Data;
 using TPOS.Infrastructure.Initialization;
 
@@ -17,7 +20,37 @@ builder.Services.AddControllers();
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "TPOS API",
+        Version = "v1"
+    });
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Name = "Authorization",
+        Description = "Bearer Authentication with JWT Token",
+        Type = SecuritySchemeType.Http
+    });
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Id = "Bearer",
+                    Type = ReferenceType.SecurityScheme
+                }
+            },
+            new List<string>()
+        }
+    });
+});
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         .AddJwtBearer(options =>
@@ -45,14 +78,23 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddAuthorization();
 
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile).Assembly); // Add here because ServiceCollectionExtensions is under Infra Project and to avoid to install AutoMapper package in Infra Project
 builder.Services.AddInfrastructureServices();   // Custom Services
+
+// Register IHttpContextAccessor
+builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 
-//// Configure the HTTP request pipeline.
+// Initialize ClaimsAccessor
+var httpContextAccessor = app.Services.GetRequiredService<IHttpContextAccessor>();
+ClaimsAccessor.Initialize(httpContextAccessor);
+
+
+// Configure the HTTP request pipeline.
 //if (app.Environment.IsDevelopment())
 //{
-    app.UseSwagger();
+app.UseSwagger();
     app.UseSwaggerUI();
 //}
 

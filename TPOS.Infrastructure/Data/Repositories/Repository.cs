@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TPOS.Core.Interfaces.Repositories;
 
-namespace TPOS.Infrastructure.Data
+namespace TPOS.Infrastructure.Data.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class
     {
@@ -77,7 +77,7 @@ namespace TPOS.Infrastructure.Data
 
         // Implement the GetAsync method with filter, orderBy, and include
         public async Task<IEnumerable<T>> GetAsync(
-            Expression<Func<T, bool>> filter,
+            Expression<Func<T, bool>>? filter = null,
             Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
             Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null,
             bool tracking = false)

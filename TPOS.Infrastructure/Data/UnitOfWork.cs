@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TPOS.Core.Interfaces.Repositories;
 using TPOS.Core.Interfaces;
+using TPOS.Infrastructure.Data.Repositories;
 
 namespace TPOS.Infrastructure.Data
 {
@@ -15,6 +16,7 @@ namespace TPOS.Infrastructure.Data
         public UnitOfWork(AppDbContext context)
         {
             _context = context;
+            ContactInfoRepository = new ContactInfoRepository(context);
             CustomerRepository = new CustomerRepository(context);
             EmployeeRepository = new EmployeeRepository(context);
             UserRepository = new UserRepository(context);
@@ -22,6 +24,7 @@ namespace TPOS.Infrastructure.Data
             UserRoleRepository = new UserRoleRepository(context);
         }
 
+        public IContactInfoRepository ContactInfoRepository { get; private set; }
         public ICustomerRepository CustomerRepository { get; private set; }
         public IEmployeeRepository EmployeeRepository { get; private set; }
         public IUserRepository UserRepository { get; private set; }

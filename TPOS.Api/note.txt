@@ -1,14 +1,15 @@
 - Db-First Project
 - Generate Models by Scaffolding
-- Seed User Data in Db First
+- Seed UserData in Db First
 - UoW (Unit of Work) + Repository Pattern
 - Direct Use of UnitOfWork and Repositories in Controllers without using Services Layer (under Infrastructure Project)
 	but AccountController use the Service layer (does not use UoW + Repository directly) and call AuthService that 
 	encapsulates the business logic and interact with the repositories through the UnitOfWork.
-- Can use entities as parmeters in API methods by excluding navigation properties in serialization and deserialization
-  and if need to customize entities, write DTOs.
-  Recommendation: Use DTOs (do not use entities in API methods) for complex applications
+- Can use entities as parmeters or return types in API methods by excluding navigation properties in serialization and deserialization
+  and if need to customize the model, write separate DTOs.
+  Recommendation: Use DTOs (do not use entities as parameters in API methods) for complex applications
   where you need clear separation and flexibility in handling data across different layers. 
+- AutoMapper
 
 User Accounts:
 	UserName: sysadmin

@@ -28,7 +28,9 @@ namespace TPOS.Infrastructure.Services
 
         public async Task<IEnumerable<User>> GetUsersAsync()
         {
-            var users = await _unitOfWork.UserRepository.GetAllAsync();
+            var users = await _unitOfWork.UserRepository.GetAsync(
+                 filter: user => user.Active,
+                 include: user => user.Include(u => u.UserRoles.Where(x => x.Active)).ThenInclude(ur => ur.Role));
             return users;
         }
 
@@ -119,7 +121,7 @@ namespace TPOS.Infrastructure.Services
                     UserID = user.UserID,
                     UserName = user.UserName,
                     Email = user.Email,
-                    Roles = user.UserRoles.Select(x => x.Role.RoleName).Distinct().ToList<string>()
+                    Roles = user.UserRoles.Select(x => x.Role.RoleName).Distinct().ToList()
                 }
             };
         }
