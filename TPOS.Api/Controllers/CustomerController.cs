@@ -2,7 +2,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using TPOS.Api.Dtos;
+using TPOS.Api.Dtos.Request;
+using TPOS.Api.Dtos.Response;
 using TPOS.Core.Entities.Generated;
 using TPOS.Core.Interfaces;
 using TPOS.Core.Utilities;
@@ -25,42 +26,42 @@ namespace TPOS.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Customer>>> GetAllCustomers()
+        public async Task<ActionResult<IEnumerable<CustomerResponseDto>>> GetAllCustomers()
         {
             var customers = await _unitOfWork.CustomerRepository.GetAsync(
                 include: cus => cus.Include(x => x.Contact));
 
-            var customersDto = _mapper.Map<IEnumerable<CustomerDto>>(customers);
+            var customerDtos = _mapper.Map<IEnumerable<CustomerResponseDto>>(customers);
             foreach (var customer in customers)
             {
-                var customerDto = customersDto.FirstOrDefault(dto => dto.CustomerID == customer.CustomerID);
+                var customerDto = customerDtos.FirstOrDefault(dto => dto.CustomerID == customer.CustomerID);
                 if (customerDto != null)
                 {
-                    _mapper.Map(customer.Contact, customerDto); // Map ContactInfo to CustomerDto
+                    _mapper.Map(customer.Contact, customerDto); // Map ContactInfo to CustomerDto (Ignore Base Columns, see in AutoMapper)
                 }
             }
 
-            return Ok(customersDto);
+            return Ok(customerDtos);
         }
 
         [HttpGet("Active")]
-        public async Task<ActionResult<IEnumerable<Customer>>> GetActiveCustomers()
+        public async Task<ActionResult<IEnumerable<CustomerResponseDto>>> GetActiveCustomers()
         {
             var customers = await _unitOfWork.CustomerRepository.GetAsync(
                 filter: cus => cus.Active,
                 include: cus => cus.Include(x => x.Contact));
 
-            var customersDto = _mapper.Map<IEnumerable<CustomerDto>>(customers);
+            var customerDtos = _mapper.Map<IEnumerable<CustomerResponseDto>>(customers);
             foreach (var customer in customers)
             {
-                var customerDto = customersDto.FirstOrDefault(dto => dto.CustomerID == customer.CustomerID);
+                var customerDto = customerDtos.FirstOrDefault(dto => dto.CustomerID == customer.CustomerID);
                 if (customerDto != null)
                 {
-                    _mapper.Map(customer.Contact, customerDto); // Map ContactInfo to CustomerDto
+                    _mapper.Map(customer.Contact, customerDto); // Map ContactInfo to CustomerDto (Ignore Base Columns, see in AutoMapper)
                 }
             }
 
-            return Ok(customersDto);
+            return Ok(customerDtos);
         }
 
         [HttpGet("{id}")]
@@ -75,19 +76,19 @@ namespace TPOS.Api.Controllers
                 return NotFound();
             }
 
-            var customerDto = _mapper.Map<CustomerDto>(customer);
-            _mapper.Map(customer.Contact, customerDto); // Ignore Base Columns of Contact in mapping to customerDto to avoid overriding Base Columns of customerDto (see in AutoMapperProfile)
+            var customerDto = _mapper.Map<CustomerResponseDto>(customer);
+            _mapper.Map(customer.Contact, customerDto); // Ignore Base Columns of Contact in mapping to customerRespDto to avoid overriding Base Columns of customerRespDto (see in AutoMapperProfile)
 
             return Ok(customerDto);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddCustomer([FromBody] CustomerDto customerDto)
+        public async Task<IActionResult> AddCustomer([FromBody] CustomerRequestDto customerReqDto)
         {
             try
             {
                 // Map DTO to ContactInfo entity
-                var contactInfo = _mapper.Map<ContactInfo>(customerDto);
+                var contactInfo = _mapper.Map<ContactInfo>(customerReqDto);
                 contactInfo.CreatedOn = contactInfo.UpdatedOn = DateTime.UtcNow;
                 contactInfo.CreatedBy = contactInfo.UpdatedBy = ClaimsAccessor.UserID;
                 contactInfo.Active = true;
@@ -96,10 +97,10 @@ namespace TPOS.Api.Controllers
                 await _unitOfWork.CompleteAsync();
 
                 // Map DTO to Customer entity
-                var customer = _mapper.Map<Customer>(customerDto);
+                var customer = _mapper.Map<Customer>(customerReqDto);
                 customer.ContactID = contactInfo.ContactID;
                 customer.CreatedOn = customer.UpdatedOn = DateTime.UtcNow;
-                customer.CreatedBy = customerDto.UpdatedBy = ClaimsAccessor.UserID;
+                customer.CreatedBy = customer.UpdatedBy = ClaimsAccessor.UserID;
                 customer.Active = true;
 
                 await _unitOfWork.CustomerRepository.AddAsync(customer);
@@ -117,9 +118,9 @@ namespace TPOS.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateCustomer(int id, [FromBody] CustomerDto customerDto)
+        public async Task<IActionResult> UpdateCustomer(int id, [FromBody] CustomerRequestDto customerReqDto)
         {
-            if (id != customerDto.CustomerID || customerDto.ContactID == 0)
+            if (id != customerReqDto.CustomerID || customerReqDto.ContactID == 0)
             {
                 return BadRequest();
             }
@@ -139,13 +140,13 @@ namespace TPOS.Api.Controllers
                 }
 
                 // Update ContactInfo
-                _mapper.Map(customerDto, contactInfo);
+                _mapper.Map(customerReqDto, contactInfo);
                 contactInfo.UpdatedOn = DateTime.UtcNow;
                 contactInfo.UpdatedBy = ClaimsAccessor.UserID;
                 _unitOfWork.ContactInfoRepository.Update(contactInfo);
 
                 // Update Customer
-                _mapper.Map(customerDto, customer);
+                _mapper.Map(customerReqDto, customer);
                 customer.UpdatedOn = DateTime.UtcNow;
                 customer.UpdatedBy = ClaimsAccessor.UserID;
                 _unitOfWork.CustomerRepository.Update(customer);
@@ -189,5 +190,7 @@ namespace TPOS.Api.Controllers
                 return StatusCode(500, "Internal server error. Please try again later.");
             }
         }
+
+        // Link Cust to User
     }
 }
