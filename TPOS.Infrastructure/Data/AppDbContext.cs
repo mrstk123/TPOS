@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using TPOS.Infrastructure.Configurations;
+using TPOS.Infrastructure.Data.Configurations;
 using TPOS.Core.Entities.Generated;
 using Object = TPOS.Core.Entities.Generated.Object;
 #nullable disable

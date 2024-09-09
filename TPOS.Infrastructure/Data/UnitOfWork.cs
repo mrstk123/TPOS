@@ -16,6 +16,8 @@ namespace TPOS.Infrastructure.Data
         public UnitOfWork(AppDbContext context)
         {
             _context = context;
+            CompanyRepository = new CompanyRepository(context);
+            BranchRepository = new BranchRepository(context);
             ContactInfoRepository = new ContactInfoRepository(context);
             CustomerRepository = new CustomerRepository(context);
             EmployeeRepository = new EmployeeRepository(context);
@@ -24,6 +26,8 @@ namespace TPOS.Infrastructure.Data
             UserRoleRepository = new UserRoleRepository(context);
         }
 
+        public ICompanyRepository CompanyRepository { get; private set; }
+        public IBranchRepository BranchRepository { get; private set; }
         public IContactInfoRepository ContactInfoRepository { get; private set; }
         public ICustomerRepository CustomerRepository { get; private set; }
         public IEmployeeRepository EmployeeRepository { get; private set; }

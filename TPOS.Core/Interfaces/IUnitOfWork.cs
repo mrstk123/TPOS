@@ -9,6 +9,8 @@ namespace TPOS.Core.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {
+        ICompanyRepository CompanyRepository { get; }
+        IBranchRepository BranchRepository { get; }
         IContactInfoRepository ContactInfoRepository { get; }
         ICustomerRepository CustomerRepository { get; }
         IEmployeeRepository EmployeeRepository { get; }

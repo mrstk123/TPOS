@@ -140,13 +140,22 @@ namespace TPOS.Api.Controllers
                 }
 
                 // Update ContactInfo
-                _mapper.Map(customerReqDto, contactInfo);
+                // _mapper.Map(customerReqDto, contactInfo); // Using Automapper update all of the properties of contactInfo (except Ignore properties)
+                // Manually update properties
+                // contactInfo.Name = customerReqDto.Name; // do not update Name
+                contactInfo.Email = customerReqDto.Email;
+                contactInfo.Phone = customerReqDto.Phone;
+                contactInfo.Address = customerReqDto.Address;
+
                 contactInfo.UpdatedOn = DateTime.UtcNow;
                 contactInfo.UpdatedBy = ClaimsAccessor.UserID;
                 _unitOfWork.ContactInfoRepository.Update(contactInfo);
 
                 // Update Customer
-                _mapper.Map(customerReqDto, customer);
+                // _mapper.Map(customerReqDto, customer); // Using Automapper update all of the properties of customer (except Ignore properties)   
+                // Manually update properties
+                customer.DateOfBirth = customerReqDto.DateOfBirth;
+
                 customer.UpdatedOn = DateTime.UtcNow;
                 customer.UpdatedBy = ClaimsAccessor.UserID;
                 _unitOfWork.CustomerRepository.Update(customer);
@@ -179,6 +188,19 @@ namespace TPOS.Api.Controllers
 
                 //await _unitOfWork.CustomerRepository.DeleteAsync(id);
                 _unitOfWork.CustomerRepository.Update(customer);
+
+                // Inactive related Contact 
+                var contactInfo = await _unitOfWork.ContactInfoRepository.GetByIdAsync(customer.ContactID);
+                if (contactInfo != null)
+                {
+                    contactInfo.Active = false;
+                    contactInfo.UpdatedOn = DateTime.UtcNow;
+                    contactInfo.UpdatedBy = ClaimsAccessor.UserID;
+
+                    //await _unitOfWork.ContactInfoRepository.DeleteAsync(id);
+                    _unitOfWork.ContactInfoRepository.Update(contactInfo);
+                }
+
                 await _unitOfWork.CompleteAsync();
                 return NoContent();
             }

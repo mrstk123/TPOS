@@ -2,6 +2,7 @@
 using TPOS.Api.Dtos.Request;
 using TPOS.Api.Dtos.Response;
 using TPOS.Core.Entities.Generated;
+using Object = TPOS.Core.Entities.Generated.Object;
 
 namespace TPOS.Api.MappingProfiles
 {
@@ -20,7 +21,7 @@ namespace TPOS.Api.MappingProfiles
             CreateMap<User, UserResponseDto>()
             .ForMember(dest => dest.Roles, opt => opt.MapFrom(src => src.UserRoles.Select(ur => ur.Role.RoleName).Distinct().ToList()));
 
-            #region Customers
+            // Customers
             // CustomerDto has Base Columns, so need to ignore Base Columns in mapping. Other Dto does not use Base Columns
             CreateMap<Customer, CustomerResponseDto>();
             CreateMap<CustomerRequestDto, Customer>()
@@ -40,8 +41,21 @@ namespace TPOS.Api.MappingProfiles
                 .ForMember(dest => dest.UpdatedOn, opt => opt.Ignore())
                 .ForMember(dest => dest.UpdatedBy, opt => opt.Ignore())
                 .ForMember(dest => dest.Active, opt => opt.Ignore());
-            #endregion
 
+            // Employee
+            CreateMap<Employee, EmployeeResponseDto>()
+                .ForMember(dest => dest.DeparmentName, opt => opt.MapFrom(src => src.Department.ObjKey))
+                .ForMember(dest => dest.PositionName, opt => opt.MapFrom(src => src.Position.ObjKey));
+            CreateMap<ContactInfo, EmployeeResponseDto>();
+            CreateMap<Branch, EmployeeResponseDto>();
+            CreateMap<EmployeeRequestDto, Employee>();
+            CreateMap<EmployeeRequestDto, ContactInfo>();
+
+            // Branch
+            CreateMap<Branch, BranchResponseDto>();
+            CreateMap<ContactInfo, BranchResponseDto>();
+            CreateMap<Company, BranchResponseDto>();
+            CreateMap<BranchRequestDto, ContactInfo>();
 
         }
     }
