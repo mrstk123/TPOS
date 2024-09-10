@@ -4,21 +4,19 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace TPOS.Core.Entities.Generated
+namespace TPOS.Core.Entities.Generated;
+
+public partial class Role
 {
-    public partial class Role
-    {
-        public int RoleID { get; set; }
-        public string RoleName { get; set; }
-        public string RoleDescription { get; set; }
-        public DateTime CreatedOn { get; set; }
-        public int CreatedBy { get; set; }
-        public DateTime UpdatedOn { get; set; }
-        public int UpdatedBy { get; set; }
-        public bool Active { get; set; }
-
-        [JsonIgnore]
-        public virtual ICollection<UserRole> UserRoles { get; set; }
-
-    }
+    public int RoleID { get; set; }
+    public string RoleName { get; set; }
+    public string RoleDescription { get; set; }
+    public DateTime CreatedOn { get; set; }
+    public int CreatedBy { get; set; }
+    public DateTime UpdatedOn { get; set; }
+    public int UpdatedBy { get; set; }
+    public bool Active { get; set; }
+        
+    [JsonIgnore]
+    public virtual ICollection<UserRole> UserRoles { get; set; }
 }

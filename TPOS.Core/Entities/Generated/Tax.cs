@@ -4,28 +4,26 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace TPOS.Core.Entities.Generated
+namespace TPOS.Core.Entities.Generated;
+
+public partial class Tax
 {
-    public partial class Tax
-    {
-        public int TaxID { get; set; }
-        public string TaxName { get; set; }
-        public decimal TaxRate { get; set; }
-        public int TaxTypeID { get; set; }
-        public DateTime CreatedOn { get; set; }
-        public int CreatedBy { get; set; }
-        public DateTime UpdatedOn { get; set; }
-        public int UpdatedBy { get; set; }
-        public bool Active { get; set; }
-
-        [JsonIgnore]
-        public virtual Object TaxType { get; set; }
-
-        [JsonIgnore]
-        public virtual ICollection<SaleItem> SaleItems { get; set; }
-
-        [JsonIgnore]
-        public virtual ICollection<Sale> Sales { get; set; }
-
-    }
+    public int TaxID { get; set; }
+    public string TaxName { get; set; }
+    public decimal TaxRate { get; set; }
+    public int TaxTypeID { get; set; }
+    public DateTime CreatedOn { get; set; }
+    public int CreatedBy { get; set; }
+    public DateTime UpdatedOn { get; set; }
+    public int UpdatedBy { get; set; }
+    public bool Active { get; set; }
+        
+    [JsonIgnore]
+    public virtual Object TaxType { get; set; }
+        
+    [JsonIgnore]
+    public virtual ICollection<SaleItem> SaleItems { get; set; }
+        
+    [JsonIgnore]
+    public virtual ICollection<Sale> Sales { get; set; }
 }

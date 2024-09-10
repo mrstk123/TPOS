@@ -4,25 +4,23 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace TPOS.Core.Entities.Generated
+namespace TPOS.Core.Entities.Generated;
+
+public partial class Inventory
 {
-    public partial class Inventory
-    {
-        public int InventoryID { get; set; }
-        public int ProductID { get; set; }
-        public int BranchID { get; set; }
-        public int StockQuantity { get; set; }
-        public DateTime CreatedOn { get; set; }
-        public int CreatedBy { get; set; }
-        public DateTime UpdatedOn { get; set; }
-        public int UpdatedBy { get; set; }
-        public bool Active { get; set; }
-
-        [JsonIgnore]
-        public virtual Branch Branch { get; set; }
-
-        [JsonIgnore]
-        public virtual Product Product { get; set; }
-
-    }
+    public int InventoryID { get; set; }
+    public int ProductID { get; set; }
+    public int BranchID { get; set; }
+    public int StockQuantity { get; set; }
+    public DateTime CreatedOn { get; set; }
+    public int CreatedBy { get; set; }
+    public DateTime UpdatedOn { get; set; }
+    public int UpdatedBy { get; set; }
+    public bool Active { get; set; }
+        
+    [JsonIgnore]
+    public virtual Branch Branch { get; set; }
+        
+    [JsonIgnore]
+    public virtual Product Product { get; set; }
 }

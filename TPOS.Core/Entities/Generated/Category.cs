@@ -4,22 +4,20 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace TPOS.Core.Entities.Generated
+namespace TPOS.Core.Entities.Generated;
+
+public partial class Category
 {
-    public partial class Category
-    {
-        public int CategoryID { get; set; }
-        public string CategoryName { get; set; }
-        public string CategoryDescription { get; set; }
-        public string CategoryImagePath { get; set; }
-        public DateTime CreatedOn { get; set; }
-        public int CreatedBy { get; set; }
-        public DateTime UpdatedOn { get; set; }
-        public int UpdatedBy { get; set; }
-        public bool Active { get; set; }
-
-        [JsonIgnore]
-        public virtual ICollection<ProductCategory> ProductCategories { get; set; }
-
-    }
+    public int CategoryID { get; set; }
+    public string CategoryName { get; set; }
+    public string CategoryDescription { get; set; }
+    public string CategoryImagePath { get; set; }
+    public DateTime CreatedOn { get; set; }
+    public int CreatedBy { get; set; }
+    public DateTime UpdatedOn { get; set; }
+    public int UpdatedBy { get; set; }
+    public bool Active { get; set; }
+        
+    [JsonIgnore]
+    public virtual ICollection<ProductCategory> ProductCategories { get; set; }
 }

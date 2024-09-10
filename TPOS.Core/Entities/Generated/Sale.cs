@@ -4,58 +4,56 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace TPOS.Core.Entities.Generated
+namespace TPOS.Core.Entities.Generated;
+
+public partial class Sale
 {
-    public partial class Sale
-    {
-        public int SaleID { get; set; }
-        public int BranchID { get; set; }
-        public int? CustomerID { get; set; }
-        public int EmployeeID { get; set; }
-        public DateOnly SaleDate { get; set; }
-        public TimeOnly SaleTime { get; set; }
-        public int SaleCurrencyID { get; set; }
-        public decimal TotalAmount { get; set; }
-        public decimal NetAmount { get; set; }
-        public int ItemCount { get; set; }
-        public string ReceiptNumber { get; set; }
-        public int StatusID { get; set; }
-        public int? TaxID { get; set; }
-        public decimal? TaxAmount { get; set; }
-        public int? DiscountID { get; set; }
-        public decimal? DiscountAmount { get; set; }
-        public DateTime CreatedOn { get; set; }
-        public int CreatedBy { get; set; }
-        public DateTime UpdatedOn { get; set; }
-        public int UpdatedBy { get; set; }
-        public bool Active { get; set; }
-
-        [JsonIgnore]
-        public virtual Branch Branch { get; set; }
-
-        [JsonIgnore]
-        public virtual Customer Customer { get; set; }
-
-        [JsonIgnore]
-        public virtual Discount Discount { get; set; }
-
-        [JsonIgnore]
-        public virtual Employee Employee { get; set; }
-
-        [JsonIgnore]
-        public virtual Object SaleCurrency { get; set; }
-
-        [JsonIgnore]
-        public virtual Object Status { get; set; }
-
-        [JsonIgnore]
-        public virtual Tax Tax { get; set; }
-
-        [JsonIgnore]
-        public virtual ICollection<Payment> Payments { get; set; }
-
-        [JsonIgnore]
-        public virtual ICollection<SaleItem> SaleItems { get; set; }
-
-    }
+    public int SaleID { get; set; }
+    public int BranchID { get; set; }
+    public int? CustomerID { get; set; }
+    public int EmployeeID { get; set; }
+    public DateOnly SaleDate { get; set; }
+    public TimeOnly SaleTime { get; set; }
+    public int SaleCurrencyID { get; set; }
+    public decimal TotalAmount { get; set; }
+    public decimal NetAmount { get; set; }
+    public int ItemCount { get; set; }
+    public string ReceiptNumber { get; set; }
+    public int StatusID { get; set; }
+    public int? TaxID { get; set; }
+    public decimal? TaxAmount { get; set; }
+    public int? DiscountID { get; set; }
+    public decimal? DiscountAmount { get; set; }
+    public DateTime CreatedOn { get; set; }
+    public int CreatedBy { get; set; }
+    public DateTime UpdatedOn { get; set; }
+    public int UpdatedBy { get; set; }
+    public bool Active { get; set; }
+        
+    [JsonIgnore]
+    public virtual Branch Branch { get; set; }
+        
+    [JsonIgnore]
+    public virtual Customer Customer { get; set; }
+        
+    [JsonIgnore]
+    public virtual Discount Discount { get; set; }
+        
+    [JsonIgnore]
+    public virtual Employee Employee { get; set; }
+        
+    [JsonIgnore]
+    public virtual Object SaleCurrency { get; set; }
+        
+    [JsonIgnore]
+    public virtual Object Status { get; set; }
+        
+    [JsonIgnore]
+    public virtual Tax Tax { get; set; }
+        
+    [JsonIgnore]
+    public virtual ICollection<Payment> Payments { get; set; }
+        
+    [JsonIgnore]
+    public virtual ICollection<SaleItem> SaleItems { get; set; }
 }

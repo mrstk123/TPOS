@@ -4,31 +4,28 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace TPOS.Core.Entities.Generated
+namespace TPOS.Core.Entities.Generated;
+
+public partial class User
 {
-    public partial class User
-    {
-        public int UserID { get; set; }
-        public string UserName { get; set; }
-        public byte[] PasswordHash { get; set; }
-        public byte[] PasswordSalt { get; set; }
-        public DateTime? Validity { get; set; }
-        public string Email { get; set; }
-        public DateTime CreatedOn { get; set; }
-        public int CreatedBy { get; set; }
-        public DateTime UpdatedOn { get; set; }
-        public int UpdatedBy { get; set; }
-        public bool Active { get; set; }
-
-        [JsonIgnore]
-        public virtual Customer Customer { get; set; }
-
-        [JsonIgnore]
-        public virtual Employee Employee { get; set; }
-
-        [JsonIgnore]
-        public virtual ICollection<UserRole> UserRoles { get; set; }
-
-    }
+    public int UserID { get; set; }
+    public string UserName { get; set; }
+    public byte[] PasswordHash { get; set; }
+    public byte[] PasswordSalt { get; set; }
+    public DateTime? Validity { get; set; }
+    public string Email { get; set; }
+    public DateTime CreatedOn { get; set; }
+    public int CreatedBy { get; set; }
+    public DateTime UpdatedOn { get; set; }
+    public int UpdatedBy { get; set; }
+    public bool Active { get; set; }
+        
+    [JsonIgnore]
+    public virtual Customer Customer { get; set; }
+        
+    [JsonIgnore]
+    public virtual Employee Employee { get; set; }
+        
+    [JsonIgnore]
+    public virtual ICollection<UserRole> UserRoles { get; set; }
 }
-

@@ -4,32 +4,30 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace TPOS.Core.Entities.Generated
+namespace TPOS.Core.Entities.Generated;
+
+public partial class ContactInfo
 {
-    public partial class ContactInfo
-    {
-        public int ContactID { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string Phone { get; set; }
-        public string Address { get; set; }
-        public DateTime CreatedOn { get; set; }
-        public int CreatedBy { get; set; }
-        public DateTime UpdatedOn { get; set; }
-        public int UpdatedBy { get; set; }
-        public bool Active { get; set; }
-
-        [JsonIgnore]
-        public virtual ICollection<Branch> Branches { get; set; }
-
-        [JsonIgnore]
-        public virtual ICollection<Customer> Customers { get; set; }
-
-        [JsonIgnore]
-        public virtual ICollection<Employee> Employees { get; set; }
-
-        [JsonIgnore]
-        public virtual ICollection<Supplier> Suppliers { get; set; }
-
-    }
+    public int ContactID { get; set; }
+    public string Name { get; set; }
+    public string Email { get; set; }
+    public string Phone { get; set; }
+    public string Address { get; set; }
+    public DateTime CreatedOn { get; set; }
+    public int CreatedBy { get; set; }
+    public DateTime UpdatedOn { get; set; }
+    public int UpdatedBy { get; set; }
+    public bool Active { get; set; }
+        
+    [JsonIgnore]
+    public virtual ICollection<Branch> Branches { get; set; }
+        
+    [JsonIgnore]
+    public virtual ICollection<Customer> Customers { get; set; }
+        
+    [JsonIgnore]
+    public virtual ICollection<Employee> Employees { get; set; }
+        
+    [JsonIgnore]
+    public virtual ICollection<Supplier> Suppliers { get; set; }
 }

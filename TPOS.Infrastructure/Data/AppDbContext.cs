@@ -2,10 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using TPOS.Infrastructure.Data.Configurations;
 using TPOS.Core.Entities.Generated;
+using TPOS.Infrastructure.Data.Configurations;
 using Object = TPOS.Core.Entities.Generated.Object;
-#nullable disable
 
 namespace TPOS.Infrastructure.Data;
 

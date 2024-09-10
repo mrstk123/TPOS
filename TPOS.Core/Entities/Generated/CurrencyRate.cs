@@ -4,27 +4,25 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace TPOS.Core.Entities.Generated
+namespace TPOS.Core.Entities.Generated;
+
+public partial class CurrencyRate
 {
-    public partial class CurrencyRate
-    {
-        public int CurrencyRateID { get; set; }
-        public int BaseCurrencyID { get; set; }
-        public int ForeignCurrencyID { get; set; }
-        public decimal Rate { get; set; }
-        public DateOnly FromDate { get; set; }
-        public DateOnly ToDate { get; set; }
-        public DateTime CreatedOn { get; set; }
-        public int CreatedBy { get; set; }
-        public DateTime UpdatedOn { get; set; }
-        public int UpdatedBy { get; set; }
-        public bool Active { get; set; }
-
-        [JsonIgnore]
-        public virtual Object BaseCurrency { get; set; }
-
-        [JsonIgnore]
-        public virtual Object ForeignCurrency { get; set; }
-
-    }
+    public int CurrencyRateID { get; set; }
+    public int BaseCurrencyID { get; set; }
+    public int ForeignCurrencyID { get; set; }
+    public decimal Rate { get; set; }
+    public DateOnly FromDate { get; set; }
+    public DateOnly ToDate { get; set; }
+    public DateTime CreatedOn { get; set; }
+    public int CreatedBy { get; set; }
+    public DateTime UpdatedOn { get; set; }
+    public int UpdatedBy { get; set; }
+    public bool Active { get; set; }
+        
+    [JsonIgnore]
+    public virtual Object BaseCurrency { get; set; }
+        
+    [JsonIgnore]
+    public virtual Object ForeignCurrency { get; set; }
 }

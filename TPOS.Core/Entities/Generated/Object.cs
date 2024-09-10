@@ -4,62 +4,60 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace TPOS.Core.Entities.Generated
+namespace TPOS.Core.Entities.Generated;
+
+public partial class Object
 {
-    public partial class Object
-    {
-        public int ObjID { get; set; }
-        public string ObjType { get; set; }
-        public string ObjKey { get; set; }
-        public string ObjDesc { get; set; }
-        public string ObjText1 { get; set; }
-        public string ObjText2 { get; set; }
-        public string ObjText3 { get; set; }
-        public bool IsSysObj { get; set; }
-        public DateTime CreatedOn { get; set; }
-        public int CreatedBy { get; set; }
-        public DateTime UpdatedOn { get; set; }
-        public int UpdatedBy { get; set; }
-        public bool Active { get; set; }
-
-        [JsonIgnore]
-        public virtual ICollection<CurrencyRate> CurrencyRateBaseCurrencies { get; set; }
-
-        [JsonIgnore]
-        public virtual ICollection<CurrencyRate> CurrencyRateForeignCurrencies { get; set; }
-
-        [JsonIgnore]
-        public virtual ICollection<Discount> Discounts { get; set; }
-
-        [JsonIgnore]
-        public virtual ICollection<Employee> EmployeeDepartments { get; set; }
-
-        [JsonIgnore]
-        public virtual ICollection<Employee> EmployeePositions { get; set; }
-
-        [JsonIgnore]
-        public virtual ICollection<Loyalty> Loyalties { get; set; }
-
-        [JsonIgnore]
-        public virtual ICollection<Payment> PaymentPaymentCurrencies { get; set; }
-
-        [JsonIgnore]
-        public virtual ICollection<Payment> PaymentPaymentTypes { get; set; }
-
-        [JsonIgnore]
-        public virtual ICollection<ProductItem> ProductItems { get; set; }
-
-        [JsonIgnore]
-        public virtual ICollection<Product> Products { get; set; }
-
-        [JsonIgnore]
-        public virtual ICollection<Sale> SaleSaleCurrencies { get; set; }
-
-        [JsonIgnore]
-        public virtual ICollection<Sale> SaleStatuses { get; set; }
-
-        [JsonIgnore]
-        public virtual ICollection<Tax> Taxes { get; set; }
-
-    }
+    public int ObjID { get; set; }
+    public string ObjType { get; set; }
+    public string ObjKey { get; set; }
+    public string ObjDesc { get; set; }
+    public string ObjText1 { get; set; }
+    public string ObjText2 { get; set; }
+    public string ObjText3 { get; set; }
+    public bool IsSysObj { get; set; }
+    public DateTime CreatedOn { get; set; }
+    public int CreatedBy { get; set; }
+    public DateTime UpdatedOn { get; set; }
+    public int UpdatedBy { get; set; }
+    public bool Active { get; set; }
+        
+    [JsonIgnore]
+    public virtual ICollection<CurrencyRate> CurrencyRateBaseCurrencies { get; set; }
+        
+    [JsonIgnore]
+    public virtual ICollection<CurrencyRate> CurrencyRateForeignCurrencies { get; set; }
+        
+    [JsonIgnore]
+    public virtual ICollection<Discount> Discounts { get; set; }
+        
+    [JsonIgnore]
+    public virtual ICollection<Employee> EmployeeDepartments { get; set; }
+        
+    [JsonIgnore]
+    public virtual ICollection<Employee> EmployeePositions { get; set; }
+        
+    [JsonIgnore]
+    public virtual ICollection<Loyalty> Loyalties { get; set; }
+        
+    [JsonIgnore]
+    public virtual ICollection<Payment> PaymentPaymentCurrencies { get; set; }
+        
+    [JsonIgnore]
+    public virtual ICollection<Payment> PaymentPaymentTypes { get; set; }
+        
+    [JsonIgnore]
+    public virtual ICollection<ProductItem> ProductItems { get; set; }
+        
+    [JsonIgnore]
+    public virtual ICollection<Product> Products { get; set; }
+        
+    [JsonIgnore]
+    public virtual ICollection<Sale> SaleSaleCurrencies { get; set; }
+        
+    [JsonIgnore]
+    public virtual ICollection<Sale> SaleStatuses { get; set; }
+        
+    [JsonIgnore]
+    public virtual ICollection<Tax> Taxes { get; set; }
 }

@@ -4,29 +4,27 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace TPOS.Core.Entities.Generated
+namespace TPOS.Core.Entities.Generated;
+
+public partial class Loyalty
 {
-    public partial class Loyalty
-    {
-        public int LoyaltyID { get; set; }
-        public int CustomerID { get; set; }
-        public int LoyaltyProgID { get; set; }
-        public int PointsEarned { get; set; }
-        public int MembershipLevelID { get; set; }
-        public DateTime CreatedOn { get; set; }
-        public int CreatedBy { get; set; }
-        public DateTime UpdatedOn { get; set; }
-        public int UpdatedBy { get; set; }
-        public bool Active { get; set; }
-
-        [JsonIgnore]
-        public virtual Customer Customer { get; set; }
-
-        [JsonIgnore]
-        public virtual LoyaltyProg LoyaltyProg { get; set; }
-
-        [JsonIgnore]
-        public virtual Object MembershipLevel { get; set; }
-
-    }
+    public int LoyaltyID { get; set; }
+    public int CustomerID { get; set; }
+    public int LoyaltyProgID { get; set; }
+    public int PointsEarned { get; set; }
+    public int MembershipLevelID { get; set; }
+    public DateTime CreatedOn { get; set; }
+    public int CreatedBy { get; set; }
+    public DateTime UpdatedOn { get; set; }
+    public int UpdatedBy { get; set; }
+    public bool Active { get; set; }
+        
+    [JsonIgnore]
+    public virtual Customer Customer { get; set; }
+        
+    [JsonIgnore]
+    public virtual LoyaltyProg LoyaltyProg { get; set; }
+        
+    [JsonIgnore]
+    public virtual Object MembershipLevel { get; set; }
 }

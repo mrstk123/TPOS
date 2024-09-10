@@ -4,35 +4,33 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace TPOS.Core.Entities.Generated
+namespace TPOS.Core.Entities.Generated;
+
+public partial class Discount
 {
-    public partial class Discount
-    {
-        public int DiscountID { get; set; }
-        public string DiscountDescription { get; set; }
-        public int ProductID { get; set; }
-        public string DiscountCode { get; set; }
-        public int DiscountTypeID { get; set; }
-        public decimal DiscountValue { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime? EndDate { get; set; }
-        public DateTime CreatedOn { get; set; }
-        public int CreatedBy { get; set; }
-        public DateTime UpdatedOn { get; set; }
-        public int UpdatedBy { get; set; }
-        public bool Active { get; set; }
-
-        [JsonIgnore]
-        public virtual Object DiscountType { get; set; }
-
-        [JsonIgnore]
-        public virtual Product Product { get; set; }
-
-        [JsonIgnore]
-        public virtual ICollection<SaleItem> SaleItems { get; set; }
-
-        [JsonIgnore]
-        public virtual ICollection<Sale> Sales { get; set; }
-
-    }
+    public int DiscountID { get; set; }
+    public string DiscountDescription { get; set; }
+    public int ProductID { get; set; }
+    public string DiscountCode { get; set; }
+    public int DiscountTypeID { get; set; }
+    public decimal DiscountValue { get; set; }
+    public DateTime StartDate { get; set; }
+    public DateTime? EndDate { get; set; }
+    public DateTime CreatedOn { get; set; }
+    public int CreatedBy { get; set; }
+    public DateTime UpdatedOn { get; set; }
+    public int UpdatedBy { get; set; }
+    public bool Active { get; set; }
+        
+    [JsonIgnore]
+    public virtual Object DiscountType { get; set; }
+        
+    [JsonIgnore]
+    public virtual Product Product { get; set; }
+        
+    [JsonIgnore]
+    public virtual ICollection<SaleItem> SaleItems { get; set; }
+        
+    [JsonIgnore]
+    public virtual ICollection<Sale> Sales { get; set; }
 }

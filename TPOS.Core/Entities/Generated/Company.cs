@@ -4,23 +4,21 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace TPOS.Core.Entities.Generated
+namespace TPOS.Core.Entities.Generated;
+
+public partial class Company
 {
-    public partial class Company
-    {
-        public int CompanyID { get; set; }
-        public string CompanyName { get; set; }
-        public string CompanyAddress { get; set; }
-        public string CompanyPhone { get; set; }
-        public string CompanyEmail { get; set; }
-        public DateTime CreatedOn { get; set; }
-        public int CreatedBy { get; set; }
-        public DateTime UpdatedOn { get; set; }
-        public int UpdatedBy { get; set; }
-        public bool Active { get; set; }
-
-        [JsonIgnore]
-        public virtual ICollection<Branch> Branches { get; set; }
-
-    }
+    public int CompanyID { get; set; }
+    public string CompanyName { get; set; }
+    public string CompanyAddress { get; set; }
+    public string CompanyPhone { get; set; }
+    public string CompanyEmail { get; set; }
+    public DateTime CreatedOn { get; set; }
+    public int CreatedBy { get; set; }
+    public DateTime UpdatedOn { get; set; }
+    public int UpdatedBy { get; set; }
+    public bool Active { get; set; }
+        
+    [JsonIgnore]
+    public virtual ICollection<Branch> Branches { get; set; }
 }
