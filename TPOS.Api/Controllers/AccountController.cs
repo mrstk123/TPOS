@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TPOS.Api.Dtos.Request;
 using TPOS.Api.Dtos.Response;
-using TPOS.Core.Interfaces.Services;
+using TPOS.Application.Interfaces.Services;
 
 namespace TPOS.Api.Controllers
 {

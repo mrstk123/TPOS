@@ -4,10 +4,10 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 using TPOS.Api.MappingProfiles;
-using TPOS.Core.Interfaces.Services;
-using TPOS.Core.Utilities;
+using TPOS.Application.Interfaces.Services;
 using TPOS.Infrastructure.Data;
 using TPOS.Infrastructure.Initialization;
+using TPOS.Infrastructure.Security;
 
 var builder = WebApplication.CreateBuilder(args);
 

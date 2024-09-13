@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\TPOS.Core\TPOS.Core.csproj" />
-    <ProjectReference Include="..\TPOS.Infrastructure\TPOS.Infrastructure.csproj" />
+    <ProjectReference Include="..\TPOS.Core\TPOS.Domain.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
@@ -11,4 +10,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.6" />
+  </ItemGroup>
+	
 </Project>

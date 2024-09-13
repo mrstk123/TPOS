@@ -1,5 +1,5 @@
 ﻿using System.Text.Json.Serialization;
-using TPOS.Core.Entities.Generated;
+using TPOS.Domain.Entities.Generated;
 
 namespace TPOS.Api.Dtos.Response
 {

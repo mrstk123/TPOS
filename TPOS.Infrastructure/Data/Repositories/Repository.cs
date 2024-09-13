@@ -6,7 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
-using TPOS.Core.Interfaces.Repositories;
+using TPOS.Application.Interfaces.Repositories;
 
 namespace TPOS.Infrastructure.Data.Repositories
 {

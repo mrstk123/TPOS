@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using TPOS.Core.Interfaces;
-using TPOS.Core.Interfaces.Services;
+using TPOS.Application.Interfaces;
+using TPOS.Application.Interfaces.Services;
 using TPOS.Infrastructure.Data;
-using TPOS.Infrastructure.Services;
+using TPOS.Infrastructure.Security;
 
 namespace TPOS.Infrastructure.Initialization
 {

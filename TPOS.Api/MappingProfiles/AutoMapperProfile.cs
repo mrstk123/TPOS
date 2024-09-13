@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using TPOS.Api.Dtos.Request;
 using TPOS.Api.Dtos.Response;
-using TPOS.Core.Entities.Generated;
-using Object = TPOS.Core.Entities.Generated.Object;
+using TPOS.Domain.Entities.Generated;
+using Object = TPOS.Domain.Entities.Generated.Object;
 
 namespace TPOS.Api.MappingProfiles
 {

@@ -1,4 +1,6 @@
-Clean architectural pattern
+Clean architectural pattern:
+Clean Architecture is a design pattern that separates an application into different layers based on their responsibility
+
 
 Api Project - This project should primarily focus on API controllers and handling HTTP requests. 
 

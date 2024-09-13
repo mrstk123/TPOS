@@ -3,8 +3,8 @@
 
 using System.Collections.Generic;
 using System.Linq;	
-using TPOS.Core.Interfaces.Repositories;
-using TPOS.Core.Entities.Generated;
+using TPOS.Application.Interfaces.Repositories;
+using TPOS.Domain.Entities.Generated;
 
 namespace TPOS.Infrastructure.Data.Repositories
 {             

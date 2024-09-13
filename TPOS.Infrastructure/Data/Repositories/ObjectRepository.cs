@@ -2,9 +2,9 @@
 
 using System.Collections.Generic;
 using System.Linq;	
-using TPOS.Core.Interfaces.Repositories;
-using TPOS.Core.Entities.Generated;
-using Object = TPOS.Core.Entities.Generated.Object;
+using TPOS.Application.Interfaces.Repositories;
+using TPOS.Domain.Entities.Generated;
+using Object = TPOS.Domain.Entities.Generated.Object;
 
 namespace TPOS.Infrastructure.Data.Repositories
 {             

@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace TPOS.Core.Entities.Generated;
+namespace TPOS.Domain.Entities.Generated;
 
 public partial class Discount
 {

@@ -14,8 +14,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TPOS.Core\TPOS.Core.csproj" />
     <ProjectReference Include="..\TPOS.Application\TPOS.Application.csproj" />
+    <ProjectReference Include="..\TPOS.Infrastructure\TPOS.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Extensions\" />
   </ItemGroup>
 
 </Project>

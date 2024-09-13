@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using TPOS.Core.Entities.Generated;
-using TPOS.Core.Interfaces;
-using TPOS.Core.Utilities;
+using TPOS.Domain.Entities.Generated;
+using TPOS.Application.Interfaces;
+using TPOS.Infrastructure.Security;
 
 namespace TPOS.Api.Controllers
 {

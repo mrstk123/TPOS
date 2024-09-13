@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TPOS.Api.Dtos.Request;
 using TPOS.Api.Dtos.Response;
-using TPOS.Core.Entities.Generated;
-using TPOS.Core.Interfaces;
-using TPOS.Core.Utilities;
+using TPOS.Application.Interfaces;
+using TPOS.Domain.Entities.Generated;
+using TPOS.Infrastructure.Security;
 
 namespace TPOS.Api.Controllers
 {
