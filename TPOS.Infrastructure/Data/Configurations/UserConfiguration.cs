@@ -6,31 +6,30 @@ using System.Collections.Generic;
 using TPOS.Domain.Entities.Generated;
 using TPOS.Infrastructure.Data;
 
-namespace TPOS.Infrastructure.Data.EntityConfigurations
+namespace TPOS.Infrastructure.Data.Configurations
 {
-    public partial class ContactInfoConfiguration : IEntityTypeConfiguration<ContactInfo>
+    public partial class UserConfiguration : IEntityTypeConfiguration<User>
     {
-        public void Configure(EntityTypeBuilder<ContactInfo> entity)
+        public void Configure(EntityTypeBuilder<User> entity)
         {
-            entity.HasKey(e => e.ContactID);
+            entity.HasIndex(e => e.UserName, "IX_Users").IsUnique();
 
-            entity.Property(e => e.Address).HasColumnType("text");
             entity.Property(e => e.CreatedOn).HasColumnType("datetime");
             entity.Property(e => e.Email)
                 .HasMaxLength(64)
                 .IsUnicode(false);
-            entity.Property(e => e.Name)
+            entity.Property(e => e.PasswordHash).IsRequired();
+            entity.Property(e => e.PasswordSalt).IsRequired();
+            entity.Property(e => e.UpdatedOn).HasColumnType("datetime");
+            entity.Property(e => e.UserName)
                 .IsRequired()
                 .HasMaxLength(64)
                 .IsUnicode(false);
-            entity.Property(e => e.Phone)
-                .HasMaxLength(20)
-                .IsUnicode(false);
-            entity.Property(e => e.UpdatedOn).HasColumnType("datetime");
+            entity.Property(e => e.Validity).HasColumnType("datetime");
 
             OnConfigurePartial(entity);
         }
 
-        partial void OnConfigurePartial(EntityTypeBuilder<ContactInfo> entity);
+        partial void OnConfigurePartial(EntityTypeBuilder<User> entity);
     }
 }

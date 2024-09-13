@@ -7,7 +7,7 @@ using TPOS.Domain.Entities.Generated;
 using TPOS.Infrastructure.Data;
 using Object = TPOS.Domain.Entities.Generated.Object;
 
-namespace TPOS.Infrastructure.Data.EntityConfigurations
+namespace TPOS.Infrastructure.Data.Configurations
 {
     public partial class ObjectConfiguration : IEntityTypeConfiguration<Object>
     {

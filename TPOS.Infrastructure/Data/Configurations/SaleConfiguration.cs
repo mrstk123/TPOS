@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using TPOS.Domain.Entities.Generated;
 using TPOS.Infrastructure.Data;
 
-namespace TPOS.Infrastructure.Data.EntityConfigurations
+namespace TPOS.Infrastructure.Data.Configurations
 {
     public partial class SaleConfiguration : IEntityTypeConfiguration<Sale>
     {

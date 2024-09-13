@@ -6,27 +6,31 @@ using System.Collections.Generic;
 using TPOS.Domain.Entities.Generated;
 using TPOS.Infrastructure.Data;
 
-namespace TPOS.Infrastructure.Data.EntityConfigurations
+namespace TPOS.Infrastructure.Data.Configurations
 {
-    public partial class RoleConfiguration : IEntityTypeConfiguration<Role>
+    public partial class ContactInfoConfiguration : IEntityTypeConfiguration<ContactInfo>
     {
-        public void Configure(EntityTypeBuilder<Role> entity)
+        public void Configure(EntityTypeBuilder<ContactInfo> entity)
         {
-            entity.HasIndex(e => e.RoleName, "IX_Roles").IsUnique();
+            entity.HasKey(e => e.ContactID);
 
+            entity.Property(e => e.Address).HasColumnType("text");
             entity.Property(e => e.CreatedOn).HasColumnType("datetime");
-            entity.Property(e => e.RoleDescription)
-                .HasMaxLength(100)
+            entity.Property(e => e.Email)
+                .HasMaxLength(64)
                 .IsUnicode(false);
-            entity.Property(e => e.RoleName)
+            entity.Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(64)
+                .IsUnicode(false);
+            entity.Property(e => e.Phone)
+                .HasMaxLength(20)
                 .IsUnicode(false);
             entity.Property(e => e.UpdatedOn).HasColumnType("datetime");
 
             OnConfigurePartial(entity);
         }
 
-        partial void OnConfigurePartial(EntityTypeBuilder<Role> entity);
+        partial void OnConfigurePartial(EntityTypeBuilder<ContactInfo> entity);
     }
 }

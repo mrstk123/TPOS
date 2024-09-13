@@ -62,29 +62,29 @@ public partial class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfiguration(new EntityConfigurations.BranchConfiguration());
-        modelBuilder.ApplyConfiguration(new EntityConfigurations.CategoryConfiguration());
-        modelBuilder.ApplyConfiguration(new EntityConfigurations.CompanyConfiguration());
-        modelBuilder.ApplyConfiguration(new EntityConfigurations.ContactInfoConfiguration());
-        modelBuilder.ApplyConfiguration(new EntityConfigurations.CurrencyRateConfiguration());
-        modelBuilder.ApplyConfiguration(new EntityConfigurations.CustomerConfiguration());
-        modelBuilder.ApplyConfiguration(new EntityConfigurations.DiscountConfiguration());
-        modelBuilder.ApplyConfiguration(new EntityConfigurations.EmployeeConfiguration());
-        modelBuilder.ApplyConfiguration(new EntityConfigurations.InventoryConfiguration());
-        modelBuilder.ApplyConfiguration(new EntityConfigurations.LoyaltyConfiguration());
-        modelBuilder.ApplyConfiguration(new EntityConfigurations.LoyaltyProgConfiguration());
-        modelBuilder.ApplyConfiguration(new EntityConfigurations.ObjectConfiguration());
-        modelBuilder.ApplyConfiguration(new EntityConfigurations.PaymentConfiguration());
-        modelBuilder.ApplyConfiguration(new EntityConfigurations.ProductConfiguration());
-        modelBuilder.ApplyConfiguration(new EntityConfigurations.ProductCategoryConfiguration());
-        modelBuilder.ApplyConfiguration(new EntityConfigurations.ProductItemConfiguration());
-        modelBuilder.ApplyConfiguration(new EntityConfigurations.RoleConfiguration());
-        modelBuilder.ApplyConfiguration(new EntityConfigurations.SaleConfiguration());
-        modelBuilder.ApplyConfiguration(new EntityConfigurations.SaleItemConfiguration());
-        modelBuilder.ApplyConfiguration(new EntityConfigurations.SupplierConfiguration());
-        modelBuilder.ApplyConfiguration(new EntityConfigurations.TaxConfiguration());
-        modelBuilder.ApplyConfiguration(new EntityConfigurations.UserConfiguration());
-        modelBuilder.ApplyConfiguration(new EntityConfigurations.UserRoleConfiguration());
+        modelBuilder.ApplyConfiguration(new Configurations.BranchConfiguration());
+        modelBuilder.ApplyConfiguration(new Configurations.CategoryConfiguration());
+        modelBuilder.ApplyConfiguration(new Configurations.CompanyConfiguration());
+        modelBuilder.ApplyConfiguration(new Configurations.ContactInfoConfiguration());
+        modelBuilder.ApplyConfiguration(new Configurations.CurrencyRateConfiguration());
+        modelBuilder.ApplyConfiguration(new Configurations.CustomerConfiguration());
+        modelBuilder.ApplyConfiguration(new Configurations.DiscountConfiguration());
+        modelBuilder.ApplyConfiguration(new Configurations.EmployeeConfiguration());
+        modelBuilder.ApplyConfiguration(new Configurations.InventoryConfiguration());
+        modelBuilder.ApplyConfiguration(new Configurations.LoyaltyConfiguration());
+        modelBuilder.ApplyConfiguration(new Configurations.LoyaltyProgConfiguration());
+        modelBuilder.ApplyConfiguration(new Configurations.ObjectConfiguration());
+        modelBuilder.ApplyConfiguration(new Configurations.PaymentConfiguration());
+        modelBuilder.ApplyConfiguration(new Configurations.ProductConfiguration());
+        modelBuilder.ApplyConfiguration(new Configurations.ProductCategoryConfiguration());
+        modelBuilder.ApplyConfiguration(new Configurations.ProductItemConfiguration());
+        modelBuilder.ApplyConfiguration(new Configurations.RoleConfiguration());
+        modelBuilder.ApplyConfiguration(new Configurations.SaleConfiguration());
+        modelBuilder.ApplyConfiguration(new Configurations.SaleItemConfiguration());
+        modelBuilder.ApplyConfiguration(new Configurations.SupplierConfiguration());
+        modelBuilder.ApplyConfiguration(new Configurations.TaxConfiguration());
+        modelBuilder.ApplyConfiguration(new Configurations.UserConfiguration());
+        modelBuilder.ApplyConfiguration(new Configurations.UserRoleConfiguration());
 
         OnModelCreatingPartial(modelBuilder);
     }
