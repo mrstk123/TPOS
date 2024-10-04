@@ -1,23 +1,58 @@
 Clean architectural pattern:
 Clean Architecture is a design pattern that separates an application into different layers based on their responsibility
 
+Domain Project - This project is intended to hold the core business logic (like OrderCalculationService) and domain models.
+
+Application Project - This project contains the use cases(or Application Services), Repository Interfaces, Service Interfaces, Data Transfer Objects-DTOs
+(e.g., API and Application Layer, or Application Layer and Domain Layer) and Mappers(handle DTO and entity conversion).
+Coordinate interactions between Domain and other layers.
+
+Infrastructure Project - This project is responsible for implementing the interfaces defined in the Application project.
+This project deals with infrastructure concerns, such as data access (e.g., Entity Framework DbContext), external services, repositories, and any other implementations that depend on external systems.
 
 Api Project - This project should primarily focus on API controllers and handling HTTP requests. 
 
-Core Project: This project is intended to hold the core business logic, domain models, 
-and service contracts.
+# Clean Architecture: Project Structure
 
-Infrastructure Project - This project is responsible for implementing the interfaces defined in the Core project.
-It handles details such as data access, external services, and other infrastructure concerns.
-(store EF Core Configurations and AppDbContext,DbInitializer, Repositories, Service Implementations and External Service Integrations)
+## 1. Domain Project
+- **Entities**
+  - `Domain/Entities/`
 
+## 2. Application Project
+- **Repository Interfaces**
+  - `Application/Interfaces/Repositories/`
+- **IUnitOfWork (interface)**
+  - `Application/Interfaces/IUnitOfWork.cs`
+- **Models** (Internal Data Transfer)
+  - `Application/Models/`
+- **IAuthService (interface)**
+  - `Application/Interfaces/IAuthService.cs`
+- **IDbInitializer (interface)**
+  - `Application/Interfaces/IDbInitializer.cs`
 
-Or
+## 3. Infrastructure Project
+- **Entity Configurations**
+  - `Infrastructure/Data/Configurations/`
+- **AppDbContext**
+  - `Infrastructure/Data/AppDbContext.cs`
+- **Repositories**
+  - `Infrastructure/Data/Repositories/`
+- **UnitOfWork (implementation)**
+  - `Infrastructure/Data/UnitOfWork.cs`
+- **ClaimsAccessor**
+  - `Infrastructure/Security/ClaimsAccessor.cs`
+- **AuthService (implementation)**
+  - `Infrastructure/Security/AuthService.cs`
+- **DbInitializer (implementation)**
+  - `Infrastructure/Initialization/DbInitializer.cs`
 
-API Project: This is where you define the entry points of your application, such as controllers, filters, and other components that directly handle HTTP requests and responses. The API project is usually responsible for interacting with the outside world.
-Core Project: This project typically contains the business logic, domain models, service interfaces, and any shared DTOs (Data Transfer Objects). It is independent of infrastructure concerns.
-Infra Project: This project deals with infrastructure concerns, such as data access (e.g., Entity Framework DbContext), external services, repositories, and any other implementations that depend on external systems.
-
+## 4. Api Project
+- **Dtos** (API Data Transfer)
+  - `Api/Dtos/`
+- **Filters**
+  - `Api/Filters/`
+- **Controllers**
+  - `Api/Controllers/`
 
 
 Role of the Infrastructure Project

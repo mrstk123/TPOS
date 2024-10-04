@@ -21,7 +21,7 @@ namespace TPOS.Infrastructure.Data.Repositories
             _dbSet = context.Set<T>();
         }
 
-        public async Task<T?> GetByIdAsync(int id)
+        public async Task<T> GetByIdAsync(int id)
         {
             return await _dbSet.FindAsync(id);
         }
@@ -36,7 +36,7 @@ namespace TPOS.Infrastructure.Data.Repositories
             return await _dbSet.Where(predicate).ToListAsync();
         }
 
-        public async Task<T?> FindFirstOrDefaultAsync(Expression<Func<T, bool>> predicate)
+        public async Task<T> FindFirstOrDefaultAsync(Expression<Func<T, bool>> predicate)
         {
             return await _dbSet.FirstOrDefaultAsync(predicate);
         }
@@ -57,7 +57,15 @@ namespace TPOS.Infrastructure.Data.Repositories
 
         public void Update(T entity)
         {
-            _dbSet.Update(entity);
+            // Option 1: Using Update - update the entity and all navigation properties 
+            // _dbSet.Update(entity); 
+
+            // Option 2: Using Attach and set state to Modified - only marks the primary entity as modified
+            if (_context.Entry(entity).State == EntityState.Detached)
+            {
+                _dbSet.Attach(entity);
+            }
+            _context.Entry(entity).State = EntityState.Modified;
         }
 
         // Implement Methods for batch operations
@@ -68,6 +76,8 @@ namespace TPOS.Infrastructure.Data.Repositories
 
         public void UpdateRange(IEnumerable<T> entities)
         {
+            // Marks the entities in the collection as modified and it does not automatically mark navigation properties as modified
+            // UpdateRange() will work even if you queried the entities with no tracking
             _dbSet.UpdateRange(entities);
         }
 
@@ -89,7 +99,7 @@ namespace TPOS.Infrastructure.Data.Repositories
         }
 
         // Implement the GetSingleAsync method with filter and include
-        public async Task<T?> GetSingleAsync(
+        public async Task<T> GetSingleAsync(
             Expression<Func<T, bool>> filter,
             Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null,
             bool tracking = true)

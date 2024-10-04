@@ -9,9 +9,9 @@ namespace TPOS.Application.Interfaces.Repositories
     public interface IRepository<T> where T : class
     {
         Task<IEnumerable<T>> GetAllAsync();
-        Task<T?> GetByIdAsync(int id);
+        Task<T> GetByIdAsync(int id);
         Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate);
-        Task<T?> FindFirstOrDefaultAsync(Expression<Func<T, bool>> predicate);
+        Task<T> FindFirstOrDefaultAsync(Expression<Func<T, bool>> predicate);
         Task AddAsync(T entity);
         void Update(T entity);
         Task DeleteAsync(int id);
@@ -30,7 +30,7 @@ namespace TPOS.Application.Interfaces.Repositories
             bool tracking = false    // Default to false for read-only optimization
         );
 
-        Task<T?> GetSingleAsync(
+        Task<T> GetSingleAsync(
             Expression<Func<T, bool>> filter,
             Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null,
             bool tracking = true // Default to true for single entity modification scenarios
