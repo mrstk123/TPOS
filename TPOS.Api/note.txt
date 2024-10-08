@@ -22,7 +22,9 @@ Auth:
 - Single Refresh Token per User - users can stay logged in on multiple devices until their access token expires (does not fully prevent concurrent logins)
   To acheieve or prevent multiple concurrent logins, seaparate into a new table the include
 		UserId, Token, Refresh Token, ExpiryTime, Revoked, DeviceInfo, SessionId, UserAgent, ... (see at HR System)
-	
+
+- ClaimsAccessor retrieves claims from the ClaimsPrincipal associated with the current user	
+  Microsoft.AspNetCore.Http.Abstractions is deprecated and so add a FrameworkReference instead of a PackageReference, <FrameworkReference Include="Microsoft.AspNetCore.App" />
 
 - First writing Controller is CustomerController and return CustomerDto that has Base Columns. 
   Other Api does not return Dto that has Base Columns.
