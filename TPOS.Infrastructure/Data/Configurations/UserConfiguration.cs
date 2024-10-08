@@ -20,6 +20,10 @@ namespace TPOS.Infrastructure.Data.Configurations
                 .IsUnicode(false);
             entity.Property(e => e.PasswordHash).IsRequired();
             entity.Property(e => e.PasswordSalt).IsRequired();
+            entity.Property(e => e.RefreshToken)
+                .HasMaxLength(256)
+                .IsUnicode(false);
+            entity.Property(e => e.RefreshTokenExpiryTime).HasColumnType("datetime");
             entity.Property(e => e.UpdatedOn).HasColumnType("datetime");
             entity.Property(e => e.UserName)
                 .IsRequired()

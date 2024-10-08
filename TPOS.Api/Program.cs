@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using TPOS.Api.MappingProfiles;
 using TPOS.Application.Interfaces.Services;
@@ -53,22 +55,24 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-        .AddJwtBearer(options =>
+    .AddJwtBearer(options =>
+    {
+        // options.MapInboundClaims = false;
+
+        options.SaveToken = true;
+        options.TokenValidationParameters = new TokenValidationParameters
         {
-            options.SaveToken = true;
-            options.TokenValidationParameters = new TokenValidationParameters
-            {
-                ValidateIssuer = true,
-                ValidateAudience = true,
-                ValidateLifetime = true,
-                ValidateIssuerSigningKey = true,
-                ValidIssuer = builder.Configuration["Jwt:Issuer"],
-                ValidAudience = builder.Configuration["Jwt:Audience"],
-                IssuerSigningKey = new SymmetricSecurityKey(
-                    Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"] ?? string.Empty)),
-                ClockSkew = TimeSpan.Zero
-            };
-        });
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"] ?? string.Empty)),
+            ClockSkew = TimeSpan.Zero
+        };
+    });
 
 //builder.Services.AddAuthorization(options =>
 //{
@@ -95,10 +99,18 @@ ClaimsAccessor.Initialize(httpContextAccessor);
 //if (app.Environment.IsDevelopment())
 //{
 app.UseSwagger();
-    app.UseSwaggerUI();
+app.UseSwaggerUI();
 //}
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
+//app.UseStaticFiles(new StaticFileOptions
+//{
+//    FileProvider = new PhysicalFileProvider(
+//            Path.Combine(builder.Environment.ContentRootPath, "wwwroot")),
+//    RequestPath = ""
+//});
+
 
 app.UseRouting();   // sets up the routing system to understand the incoming request paths.
 

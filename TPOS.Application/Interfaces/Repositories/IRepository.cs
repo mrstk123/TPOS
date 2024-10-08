@@ -24,16 +24,16 @@ namespace TPOS.Application.Interfaces.Repositories
 
         // Methods for advanced querying
         Task<IEnumerable<T>> GetAsync(
-            Expression<Func<T, bool>>? filter = null,
-            Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
-            Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null,
+            Expression<Func<T, bool>> filter = null,
+            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
+            Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null,
             bool tracking = false    // Default to false for read-only optimization
         );
 
         Task<T> GetSingleAsync(
             Expression<Func<T, bool>> filter,
-            Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null,
-            bool tracking = true // Default to true for single entity modification scenarios
+            Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null,
+            bool tracking = false 
         );
     }
 }

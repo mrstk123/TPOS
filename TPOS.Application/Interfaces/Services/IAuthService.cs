@@ -13,5 +13,8 @@ namespace TPOS.Application.Interfaces.Services
         Task<IEnumerable<User>> GetUsersAsync();
         Task<RegisterResponse> RegisterAsync(string userName, string password, string? email);
         Task<LoginResponse> LoginAsync(string username, string password);
+        Task<LogoutResponse> LogoutAsync(int useID);
+        Task<bool> RevokeAsync(int userID);
+        Task<Token> RefreshAsync(Token token);
     }
 }

@@ -2,15 +2,27 @@
 - Generate Models by Scaffolding
 - Seed UserData in Db First
 - UoW (Unit of Work) + Repository Pattern
+- AutoMapper
 - Direct Use of UnitOfWork and Repositories in Controllers without using Services Layer (under Infrastructure Project)
 	but AccountController use the Service layer (does not use UoW + Repository directly) and call AuthService that 
 	encapsulates the business logic and interact with the repositories through the UnitOfWork.
 - Can use entities as parmeters or return types in API methods by excluding navigation properties in serialization and deserialization
   and if need to customize the model, write separate DTOs.
-  Recommendation: Use DTOs (do not use entities as parameters in API methods) for complex applications
+  Recommendation: Use DTOs (and do not use entities as parameters in API methods) for complex applications
   where you need clear separation and flexibility in handling data across different layers.  
-  (See CompanyController and CustomerController)
-- AutoMapper
+  (See CompanyController and CustomerController that use entity as param)
+
+Auth:
+- In a simple project, refresh and revoke token is not needed. (just use Access Token)
+- A refresh token is a special token used to obtain a new access token when the current access token expires.
+- Revocation is the process of invalidating a token so that it can no longer be used to access protected resources.
+- When you revoke a refresh token, you effectively make it unusable for obtaining new access tokens by that refresh token. 
+  However, any currently valid access tokens will remain active until they reach their expiration time.
+
+- Single Refresh Token per User - users can stay logged in on multiple devices until their access token expires (does not fully prevent concurrent logins)
+  To acheieve or prevent multiple concurrent logins, seaparate into a new table the include
+		UserId, Token, Refresh Token, ExpiryTime, Revoked, DeviceInfo, SessionId, UserAgent, ... (see at HR System)
+	
 
 - First writing Controller is CustomerController and return CustomerDto that has Base Columns. 
   Other Api does not return Dto that has Base Columns.

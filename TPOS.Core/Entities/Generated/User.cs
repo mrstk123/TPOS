@@ -14,6 +14,8 @@ public partial class User
     public byte[] PasswordSalt { get; set; }
     public DateTime? Validity { get; set; }
     public string Email { get; set; }
+    public string RefreshToken { get; set; }
+    public DateTime? RefreshTokenExpiryTime { get; set; }
     public DateTime CreatedOn { get; set; }
     public int CreatedBy { get; set; }
     public DateTime UpdatedOn { get; set; }

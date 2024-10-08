@@ -11,6 +11,7 @@ namespace TPOS.Infrastructure.Initialization
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
         {
             services.AddScoped<IDbInitializer, DbInitializer>();
+            services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 

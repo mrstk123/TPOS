@@ -16,16 +16,20 @@ namespace TPOS.Infrastructure.Security
         // private readonly AppDbContext _context;  // Directly using DbContext provided by EF Core
         private readonly IConfiguration _configuration;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ITokenService _tokenService;
 
         public AuthService(// AppDbContext context,
             IConfiguration configuration,
-            IUnitOfWork unitOfWork)
+            IUnitOfWork unitOfWork,
+            ITokenService tokenService)
         {
             // _context = context;
             _configuration = configuration;
             _unitOfWork = unitOfWork;
+            _tokenService = tokenService;
         }
 
+        // Add GetUsersAsync() here cuz I don't want to use _unitOfWork in AccountController and also don't wanna create new service
         public async Task<IEnumerable<User>> GetUsersAsync()
         {
             var users = await _unitOfWork.UserRepository.GetAsync(
@@ -58,7 +62,7 @@ namespace TPOS.Infrastructure.Security
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt,
                 Email = email,
-                // Validity = DateTime.UtcNow.AddMinutes(30)
+                Validity = DateTime.UtcNow.AddMinutes(30)
             };
 
             //await _context.Users.AddAsync(newUser);
@@ -110,12 +114,21 @@ namespace TPOS.Infrastructure.Security
                 };
             }
 
-            var token = await CreateTokenAsync(user);
+            var accessToken = await _tokenService.GenerateAccessTokenAsync(user);
+            var refreshToken = await _tokenService.GenerateRefreshTokenAsync();
+            var refreshTokenExpiry = _configuration.GetValue<int>("Jwt:RefreshTokenExpiryInMinutes"); // using Microsoft.Extensions.Configuration.Binder package
+            //int.TryParse(_configuration["Jwt:RefreshTokenExpiryInMinutes"], out int refreshTokenExpiry); // without using package
+
+            // Update refreshToken of the user 
+            user.RefreshToken = refreshToken;
+            user.RefreshTokenExpiryTime = DateTime.UtcNow.AddMinutes(refreshTokenExpiry);
+            _unitOfWork.UserRepository.Update(user);
+            await _unitOfWork.CompleteAsync();
 
             return new LoginResponse
             {
                 Success = true,
-                Token = token,
+                Token = accessToken,
                 User = new UserResponse
                 {
                     UserID = user.UserID,
@@ -123,6 +136,75 @@ namespace TPOS.Infrastructure.Security
                     Email = user.Email,
                     Roles = user.UserRoles.Select(x => x.Role.RoleName).Distinct().ToList()
                 }
+            };
+        }
+
+        public async Task<LogoutResponse> LogoutAsync(int userID)
+        {
+            var user = await _unitOfWork.UserRepository.GetByIdAsync(userID);
+            if (user == null)
+            {
+               return new LogoutResponse
+                {
+                    Success = false,
+                    Message = "User not found."
+                };
+            }
+
+            await ClearRefreshToken(user);
+            return new LogoutResponse
+            {
+                Success = true,
+                Message = "Logged out successfully."
+            };
+        }
+
+        public async Task<bool> RevokeAsync(int userID)
+        {
+            var user = await _unitOfWork.UserRepository.GetByIdAsync(userID);
+            if (user == null)
+            {
+                return false; // User not found
+            }
+
+            await ClearRefreshToken(user);
+            return true;
+        }
+
+        public async Task<Token> RefreshAsync(Token token)
+        {
+            // Validate Expired Access Token (without checking expiration date) and then Validate Refresh Token
+            // Get userId from the Expired Access Token
+            var principal = _tokenService.GetPrincipalFromExpiredToken(token.AccessToken);  // Don't check the token's expiration date
+            var userIdClaim = principal.FindFirst(ClaimTypes.NameIdentifier);  
+            //var userIdClaim = principal.FindFirst(JwtRegisteredClaimNames.Sub); // even if user id is stored in sub, can only access with NameIdentifier becasue OIDC StandardClaims are renamed on JWT token handler 
+            if (userIdClaim == null)
+            {
+                // return Unauthorized("Invalid access token claims.");
+                throw new SecurityTokenException("Invalid attempt.");
+            }
+
+            var existingUser = await _unitOfWork.UserRepository.GetByIdAsync(Convert.ToInt16(userIdClaim.Value));
+            // Validate the Refresh Token
+            if (existingUser == null || existingUser.RefreshToken != token.RefreshToken || DateTime.UtcNow > existingUser.RefreshTokenExpiryTime)
+            {
+                throw new SecurityTokenException("Invalid refresh token.");
+            }
+
+            var newAccessToken = await _tokenService.GenerateAccessTokenAsync(existingUser);
+            var newRefreshToken = await _tokenService.GenerateRefreshTokenAsync();
+            var refreshTokenExpiry = _configuration.GetValue<int>("Jwt:RefreshTokenExpiryInMinutes"); // using Microsoft.Extensions.Configuration.Binder package
+            //int.TryParse(_configuration["Jwt:RefreshTokenExpiryInMinutes"], out int refreshTokenExpiry); // without using package
+
+            existingUser.RefreshToken = newRefreshToken;
+            existingUser.RefreshTokenExpiryTime = DateTime.UtcNow.AddMinutes(refreshTokenExpiry);
+            _unitOfWork.UserRepository.Update(existingUser);
+            await _unitOfWork.CompleteAsync();
+
+            return new Token
+            {
+                AccessToken = newAccessToken,
+                RefreshToken = newRefreshToken
             };
         }
 
@@ -144,39 +226,13 @@ namespace TPOS.Infrastructure.Security
             }
         }
 
-        private async Task<string> CreateTokenAsync(User user)
+        private async Task ClearRefreshToken(User user)
         {
-            var claims = new List<Claim>
-                            {
-                                new Claim(ClaimTypes.NameIdentifier, user.UserID.ToString()),
-                                new Claim(ClaimTypes.Name, user.UserName)
-                            };
+            user.RefreshToken = null;
+            user.RefreshTokenExpiryTime = null;
 
-            // var userRoles = _context.UserRoles.Where(ur => ur.UserID == user.UserID).Include(ur => ur.Role).ToList();
-            var userRoles = (await _unitOfWork.UserRoleRepository.GetAsync(
-                filter: ur => ur.UserID == user.UserID,
-                include: x => x.Include(ur => ur.Role))).ToList();
-            foreach (var userRole in userRoles)
-            {
-                claims.Add(new Claim(ClaimTypes.Role, userRole.Role.RoleName));
-            }
-
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"] ?? string.Empty));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
-
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddMinutes(double.Parse(_configuration["Jwt:DurationInMinutes"] ?? string.Empty)),
-                SigningCredentials = creds,
-                Issuer = _configuration["Jwt:Issuer"],
-                Audience = _configuration["Jwt:Audience"]
-            };
-
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-
-            return tokenHandler.WriteToken(token);
+            _unitOfWork.UserRepository.Update(user);
+            await _unitOfWork.CompleteAsync();
         }
     }
 }

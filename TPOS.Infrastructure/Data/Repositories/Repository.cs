@@ -57,7 +57,8 @@ namespace TPOS.Infrastructure.Data.Repositories
 
         public void Update(T entity)
         {
-            // Option 1: Using Update - update the entity and all navigation properties 
+            // Option 1: Using Update - marks the entity and all navigation properties as modified
+            // Update() will work for an untracked entity. EF Core does not have any prior state to compare against, so it will simply overwrite
             // _dbSet.Update(entity); 
 
             // Option 2: Using Attach and set state to Modified - only marks the primary entity as modified
@@ -89,9 +90,9 @@ namespace TPOS.Infrastructure.Data.Repositories
 
         // Implement the GetAsync method with filter, orderBy, and include
         public async Task<IEnumerable<T>> GetAsync(
-            Expression<Func<T, bool>>? filter = null,
-            Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
-            Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null,
+            Expression<Func<T, bool>> filter = null,
+            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
+            Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null,
             bool tracking = false)
         {
             var query = PrepareQueryInternal(tracking, filter, orderBy, include);
@@ -101,8 +102,8 @@ namespace TPOS.Infrastructure.Data.Repositories
         // Implement the GetSingleAsync method with filter and include
         public async Task<T> GetSingleAsync(
             Expression<Func<T, bool>> filter,
-            Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null,
-            bool tracking = true)
+            Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null,
+            bool tracking = false)
         {
             var query = PrepareQueryInternal(tracking, filter, null, include);
             return await query.SingleOrDefaultAsync();
@@ -111,9 +112,9 @@ namespace TPOS.Infrastructure.Data.Repositories
 
         #region Helper
         private IQueryable<T> PrepareQueryInternal(bool disableTracking,
-            Expression<Func<T, bool>>? filter = null,
-            Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
-            Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null)
+            Expression<Func<T, bool>> filter = null,
+            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
+            Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
         {
             IQueryable<T> query = _dbSet;
 
