@@ -33,7 +33,7 @@ namespace TPOS.Application.Interfaces.Repositories
         Task<T> GetSingleAsync(
             Expression<Func<T, bool>> filter,
             Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null,
-            bool tracking = false 
+            bool tracking = true    // Default to true for single entity modification scenarios 
         );
     }
 }

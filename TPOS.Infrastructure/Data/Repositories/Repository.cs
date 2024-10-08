@@ -103,7 +103,7 @@ namespace TPOS.Infrastructure.Data.Repositories
         public async Task<T> GetSingleAsync(
             Expression<Func<T, bool>> filter,
             Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null,
-            bool tracking = false)
+            bool tracking = true)
         {
             var query = PrepareQueryInternal(tracking, filter, null, include);
             return await query.SingleOrDefaultAsync();
@@ -111,7 +111,7 @@ namespace TPOS.Infrastructure.Data.Repositories
 
 
         #region Helper
-        private IQueryable<T> PrepareQueryInternal(bool disableTracking,
+        private IQueryable<T> PrepareQueryInternal(bool tracking,
             Expression<Func<T, bool>> filter = null,
             Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
             Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
@@ -119,7 +119,7 @@ namespace TPOS.Infrastructure.Data.Repositories
             IQueryable<T> query = _dbSet;
 
             // handle tracking
-            if (disableTracking)
+            if (!tracking)
             {
                 query = query.AsNoTracking();
             }
