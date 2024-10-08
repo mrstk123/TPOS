@@ -12,7 +12,7 @@ namespace TPOS.Application.Interfaces.Services
     {
         Task<IEnumerable<User>> GetUsersAsync();
         Task<RegisterResponse> RegisterAsync(string userName, string password, string? email);
-        Task<LoginResponse> LoginAsync(string username, string password);
+        Task<LoginResponse> LoginAsync(string loginIdentifier, string password);    // user can login with userName or Email
         Task<LogoutResponse> LogoutAsync(int useID);
         Task<bool> RevokeAsync(int userID);
         Task<Token> RefreshAsync(Token token);

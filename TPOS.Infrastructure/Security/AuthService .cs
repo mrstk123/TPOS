@@ -88,11 +88,11 @@ namespace TPOS.Infrastructure.Security
             };
         }
 
-        public async Task<LoginResponse> LoginAsync(string userName, string password)
+        public async Task<LoginResponse> LoginAsync(string loginIdentifier, string password)
         {
             //var user = await _context.Users.Include(x => x.UserRoles).FirstOrDefaultAsync(u => u.UserName == userName && x.Active);
             var user = await _unitOfWork.UserRepository.GetSingleAsync(
-                 filter: user => user.UserName == userName && user.Active,
+                 filter: user => (user.UserName.ToLower() == loginIdentifier.ToLower() || user.Email.ToLower() == loginIdentifier.ToLower()) && user.Active,
                  include: user => user.Include(u => u.UserRoles.Where(x => x.Active)).ThenInclude(ur => ur.Role));
 
             if (user == null || !VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))

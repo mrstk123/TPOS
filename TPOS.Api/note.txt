@@ -26,6 +26,10 @@ Auth:
 - ClaimsAccessor retrieves claims from the ClaimsPrincipal associated with the current user	
   Microsoft.AspNetCore.Http.Abstractions is deprecated and so add a FrameworkReference instead of a PackageReference, <FrameworkReference Include="Microsoft.AspNetCore.App" />
 
+- a virtual path (in file server) allows users to access files through a simplified and consistent URL 
+  without needing to know the underlying physical path. e.g., (/files/reports/2024-01-01-report.pdf) rather than a complicated physical path.
+
+
 - First writing Controller is CustomerController and return CustomerDto that has Base Columns. 
   Other Api does not return Dto that has Base Columns.
 
@@ -50,6 +54,7 @@ In Controllers, C# does not support inheritance between entity classes and DTOs 
 how these are typically used (DTOs being designed to decouple the domain model from the API surface)
 *** You generally cannot and should not directly inherit from entities in your DTOs to avoid redefining properties
 
+JWT:
 JWTs offer a flexible, scalable, and stateless solution that is well-suited for modern application architectures.
 Use Cases: Commonly used in stateless authentication systems, where the server does not need to store session information.
 Since the token contains user information and is signed by the server, it can be verified without needing to hit session store

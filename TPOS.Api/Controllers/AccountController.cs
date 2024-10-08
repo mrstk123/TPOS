@@ -63,7 +63,7 @@ namespace TPOS.Api.Controllers
         {
             try
             {
-                var result = await _authService.LoginAsync(userLoginDto.UserName.ToLower(), userLoginDto.Password);
+                var result = await _authService.LoginAsync(userLoginDto.LoginIdentifier, userLoginDto.Password);
 
                 if (!result.Success)
                 {
