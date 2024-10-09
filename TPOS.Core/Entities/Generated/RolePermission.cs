@@ -6,11 +6,11 @@ using System.Text.Json.Serialization;
 
 namespace TPOS.Domain.Entities.Generated;
 
-public partial class Role
+public partial class RolePermission
 {
+    public int RolePermissionID { get; set; }
     public int RoleID { get; set; }
-    public string RoleName { get; set; }
-    public string RoleDescription { get; set; }
+    public int PermissionID { get; set; }
     public DateTime CreatedOn { get; set; }
     public int CreatedBy { get; set; }
     public DateTime UpdatedOn { get; set; }
@@ -18,8 +18,8 @@ public partial class Role
     public bool Active { get; set; }
         
     [JsonIgnore]
-    public virtual ICollection<RolePermission> RolePermissions { get; set; }
+    public virtual Permission Permission { get; set; }
         
     [JsonIgnore]
-    public virtual ICollection<UserRole> UserRoles { get; set; }
+    public virtual Role Role { get; set; }
 }

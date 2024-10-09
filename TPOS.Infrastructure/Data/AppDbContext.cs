@@ -30,15 +30,23 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<Employee> Employees { get; set; }
 
+    public virtual DbSet<FileServer> FileServers { get; set; }
+
+    public virtual DbSet<Folder> Folders { get; set; }
+
     public virtual DbSet<Inventory> Inventories { get; set; }
 
     public virtual DbSet<Loyalty> Loyalties { get; set; }
 
     public virtual DbSet<LoyaltyProg> LoyaltyProgs { get; set; }
 
+    public virtual DbSet<Menu> Menus { get; set; }
+
     public virtual DbSet<Object> Objects { get; set; }
 
     public virtual DbSet<Payment> Payments { get; set; }
+
+    public virtual DbSet<Permission> Permissions { get; set; }
 
     public virtual DbSet<Product> Products { get; set; }
 
@@ -47,6 +55,8 @@ public partial class AppDbContext : DbContext
     public virtual DbSet<ProductItem> ProductItems { get; set; }
 
     public virtual DbSet<Role> Roles { get; set; }
+
+    public virtual DbSet<RolePermission> RolePermissions { get; set; }
 
     public virtual DbSet<Sale> Sales { get; set; }
 
@@ -70,15 +80,20 @@ public partial class AppDbContext : DbContext
         modelBuilder.ApplyConfiguration(new Configurations.CustomerConfiguration());
         modelBuilder.ApplyConfiguration(new Configurations.DiscountConfiguration());
         modelBuilder.ApplyConfiguration(new Configurations.EmployeeConfiguration());
+        modelBuilder.ApplyConfiguration(new Configurations.FileServerConfiguration());
+        modelBuilder.ApplyConfiguration(new Configurations.FolderConfiguration());
         modelBuilder.ApplyConfiguration(new Configurations.InventoryConfiguration());
         modelBuilder.ApplyConfiguration(new Configurations.LoyaltyConfiguration());
         modelBuilder.ApplyConfiguration(new Configurations.LoyaltyProgConfiguration());
+        modelBuilder.ApplyConfiguration(new Configurations.MenuConfiguration());
         modelBuilder.ApplyConfiguration(new Configurations.ObjectConfiguration());
         modelBuilder.ApplyConfiguration(new Configurations.PaymentConfiguration());
+        modelBuilder.ApplyConfiguration(new Configurations.PermissionConfiguration());
         modelBuilder.ApplyConfiguration(new Configurations.ProductConfiguration());
         modelBuilder.ApplyConfiguration(new Configurations.ProductCategoryConfiguration());
         modelBuilder.ApplyConfiguration(new Configurations.ProductItemConfiguration());
         modelBuilder.ApplyConfiguration(new Configurations.RoleConfiguration());
+        modelBuilder.ApplyConfiguration(new Configurations.RolePermissionConfiguration());
         modelBuilder.ApplyConfiguration(new Configurations.SaleConfiguration());
         modelBuilder.ApplyConfiguration(new Configurations.SaleItemConfiguration());
         modelBuilder.ApplyConfiguration(new Configurations.SupplierConfiguration());

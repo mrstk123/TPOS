@@ -1,0 +1,149 @@
+
+Role-based authorization: When you use [Authorize(Roles = "Admin")], you are checking directly 
+against the roles claim in the JWT token.
+Policy-based authorization: You define custom policies (like the "AdminPolicy") to encapsulate more complex
+authorization logic. Policies can include roles, claims, or even custom authorization requirements.
+Claim-based Authorization: is a specific way of implementing policy-based authorization, where the requirements
+focus on the presence or value of claims in a user's identity.
+Other-based Authorizations: ...
+
+Permission-based authorization: is another approach used for controlling access in an application,
+where you grant or deny access to specific resources or actions based on permissions rather than roles or claims.
+(In Identity Framework, store Permission data in AspNetRoleClaims table with ClaimType "Permission")
+
+Key Differences Between Roles, Claims, and Permissions:
+Roles: Users are assigned one or more roles (e.g., Admin, Manager). Roles usually map to a set of actions
+or permissions.
+Claims: Claims provide additional user data, such as email or department. These are key-value pairs 
+that describe a user.
+Permissions: More granular than roles, permissions are specific rights (e.g., EditInvoice, DeleteProduct)
+that define what actions a user can take.
+
+Implementations:
+// Role-based authorization:
+[Authorize(Roles = "Admin")]
+[Route("api/[controller]")]
+public class AdminController : ControllerBase
+{
+}
+
+// Policy-based authorization:
+// Program.cs
+services.AddAuthorization(options =>
+{
+	options.AddPolicy("AdminPolicy", policy => policy.RequireRole("Admin"));
+});
+
+// Controllers
+[Authorize(Policy = "AdminPolicy")]
+
+
+// Claim-based Authorization:
+// Program.cs
+services.AddAuthorization(options =>
+{
+    options.AddPolicy("ITDepartmentAccess", policy => policy.RequireClaim("department", "IT"));
+});
+
+// Controllers
+[Authorize(Policy = "ITDepartmentAccess")]
+public IActionResult GetDepartmentData()
+{
+}
+
+// Permission-based authorization:
+Below Tables are used to control permissions in Backend.
+	- User	
+	- Role
+	- UserRole		(Defines the relationship between users and roles (many-to-many relationship))
+	- Permission 
+	- RolePermission 
+	
+Below Tables are used to control access to menu in Frontend.
+	- Menu 
+	
+Adding Controller and Action to the Menu table makes sense if your frontend menus are directly tied to specific
+backend actions and if your app is heavily backend-driven (e.g., admin dashboards).
+Using Routes (Angular routes) might be a better alternative if your frontend is primarily managing
+the UI navigation and permissions.
+
+-----------------------------------------------------------------------------------------------------------------
+Dynamic menus based on the user's role
+
+Option 1: Map Menu to Role (RoleMenu Table)
+
+This approach directly maps menus to roles in the database. When a user logs in, you fetch the menus 
+that are associated with the roles assigned to that user.
+
+Advantages:
+Simplicity: This approach is straightforward because it only involves one relationship between Menu and Role.
+Performance: Fewer joins are required because you don’t need to go through the permission layer.
+Disadvantages:
+Limited Flexibility: If you need more granular control, like specifying which actions (view, edit, delete) 
+a role can perform on a particular menu, it becomes more difficult to manage. You would need to create 
+additional role-to-menu mappings for each action.
+Scalability Issues: As the system grows, managing direct role-menu relationships for many roles and 
+menus can become cumbersome.
+
+Database Structure:
+RoleMenu table mapping RoleId to MenuId.
+
+-- *** Recommeded 
+Option 2: Map Menu to Permission and Role to Permission (Add PermissionId column in Menu Table)
+In this approach, you map Menu to Permission, and Role to Permission. 
+When checking access to a menu, you validate if the user's role has the necessary permission for that menu.
+
+In the Menus table, each menu would have a single PermissionId that is used to check access. 
+This permission is usually a View permission, indicating that a user needs to have this specific permission
+to view/access the menu.
+
+Parent menus are primarily for grouping and organizing child menus.
+We don’t need permissions for the parent menus themselves, but we check the permissions of child menus to determine if a user can see the parent menu.
+A parent menu will only be shown if at least one of its child menus has a permission that the user’s role has access to.
+
+Permissions
+PermissionId	PermissionName	Description
+1				UserView	Permission to view users
+2				UserEdit	Permission to edit users
+3				UserDelete	Permission to delete users
+4				RoleView	Permission to view roles
+5				RoleEdit	Permission to edit roles
+6				RoleDelete	Permission to delete roles
+
+Roles
+RoleId	PermissionId
+1		1
+1		4
+2		1
+
+Menus
+MenuId	MenuName	PermissionId	ParentMenuId	Route
+1		Security			NULL	NULL		/security
+2		User Management		1		1			/users
+3		Role Management		4		1			/roles
+
+in MIMS (AppRoute table), the permission lists are stored (with comma separated) for each route and 
+if the user's role has any permissions for the route, that route is made accessible to the user.
+
+Option 3: Role-Based Feature Flags (Module/Feature Table)
+Instead of explicitly mapping Role to Menu or Permission, you could introduce a feature flag or module flag system.
+
+Each Menu could be tied to a Feature or Module.
+A role can be associated with a collection of features/modules.
+When a user logs in, the menus are loaded based on the features enabled for the role.
+Advantages:
+Feature-Level Control: This allows you to enable or disable whole features or modules rather than individual permissions, giving you higher-level control.
+Simplicity in Some Cases: It can reduce the complexity when roles correspond to entire feature sets, rather than individual permissions.
+Disadvantages:
+Less Granular: You lose the ability to have fine-grained permissions at the action level (view, edit, etc.).
+Complexity in Dynamic Scenarios: It becomes harder to implement if you need to customize permissions dynamically.
+Database Structure:
+Feature table defining the modules/features.
+MenuFeature table mapping MenuId to FeatureId.
+RoleFeature table mapping RoleId to FeatureId.
+
+Broad Access: If a user role is assigned to a module, they would gain access to all menus within that module,
+not just specific ones. This eliminates the ability to specify that, for example, the "Admin" role can access
+"User Management" but not "Role Management" in the "Security" module.
+
+-----------------------------------------------------------------------------------------------------------------

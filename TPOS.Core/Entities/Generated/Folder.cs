@@ -6,11 +6,15 @@ using System.Text.Json.Serialization;
 
 namespace TPOS.Domain.Entities.Generated;
 
-public partial class Role
+public partial class Folder
 {
-    public int RoleID { get; set; }
-    public string RoleName { get; set; }
-    public string RoleDescription { get; set; }
+    public int FolderID { get; set; }
+    public int FileServerID { get; set; }
+    public string FolderType { get; set; }
+    public string FolderKey { get; set; }
+    public string FolderDesc { get; set; }
+    public string FolderPath { get; set; }
+    public bool SysFolder { get; set; }
     public DateTime CreatedOn { get; set; }
     public int CreatedBy { get; set; }
     public DateTime UpdatedOn { get; set; }
@@ -18,8 +22,5 @@ public partial class Role
     public bool Active { get; set; }
         
     [JsonIgnore]
-    public virtual ICollection<RolePermission> RolePermissions { get; set; }
-        
-    [JsonIgnore]
-    public virtual ICollection<UserRole> UserRoles { get; set; }
+    public virtual FileServer FileServer { get; set; }
 }

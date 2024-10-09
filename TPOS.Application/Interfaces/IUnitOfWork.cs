@@ -7,29 +7,34 @@ namespace TPOS.Application.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {
-        IProductRepository ProductRepository { get; }
-        IDiscountRepository DiscountRepository { get; }
-        IUserRepository UserRepository { get; }
-        ISupplierRepository SupplierRepository { get; }
-        IUserRoleRepository UserRoleRepository { get; }
-        ILoyaltyRepository LoyaltyRepository { get; }
-        IEmployeeRepository EmployeeRepository { get; }
-        IObjectRepository ObjectRepository { get; }
-        ISaleRepository SaleRepository { get; }
-        IContactInfoRepository ContactInfoRepository { get; }
-        ICustomerRepository CustomerRepository { get; }
-        IPaymentRepository PaymentRepository { get; }
-        ICurrencyRateRepository CurrencyRateRepository { get; }
-        ISaleItemRepository SaleItemRepository { get; }
-        ICategoryRepository CategoryRepository { get; }
-        ICompanyRepository CompanyRepository { get; }
-        ILoyaltyProgRepository LoyaltyProgRepository { get; }
-        IBranchRepository BranchRepository { get; }
-        IProductItemRepository ProductItemRepository { get; }
-        IInventoryRepository InventoryRepository { get; }
-        IRoleRepository RoleRepository { get; }
         IProductCategoryRepository ProductCategoryRepository { get; }
+        ICustomerRepository CustomerRepository { get; }
+        IProductItemRepository ProductItemRepository { get; }
+        IDiscountRepository DiscountRepository { get; }
+        IPaymentRepository PaymentRepository { get; }
+        ISaleRepository SaleRepository { get; }
+        ICurrencyRateRepository CurrencyRateRepository { get; }
+        IObjectRepository ObjectRepository { get; }
+        IEmployeeRepository EmployeeRepository { get; }
+        ISaleItemRepository SaleItemRepository { get; }
+        IFolderRepository FolderRepository { get; }
+        ILoyaltyRepository LoyaltyRepository { get; }
+        ICompanyRepository CompanyRepository { get; }
+        IBranchRepository BranchRepository { get; }
+        IUserRepository UserRepository { get; }
         ITaxRepository TaxRepository { get; }
+        ILoyaltyProgRepository LoyaltyProgRepository { get; }
+        IContactInfoRepository ContactInfoRepository { get; }
+        IProductRepository ProductRepository { get; }
+        IRoleRepository RoleRepository { get; }
+        IUserRoleRepository UserRoleRepository { get; }
+        IInventoryRepository InventoryRepository { get; }
+        ICategoryRepository CategoryRepository { get; }
+        IFileServerRepository FileServerRepository { get; }
+        ISupplierRepository SupplierRepository { get; }
+        IRolePermissionRepository RolePermissionRepository { get; }
+        IMenuRepository MenuRepository { get; }
+        IPermissionRepository PermissionRepository { get; }
 
         Task<int> CompleteAsync();
     }
