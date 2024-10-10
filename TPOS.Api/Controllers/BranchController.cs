@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TPOS.Api.Dtos.Request;
 using TPOS.Api.Dtos.Response;
+using TPOS.Application.Constants;
 using TPOS.Application.Interfaces;
 using TPOS.Domain.Entities.Generated;
 using TPOS.Infrastructure.Security;
@@ -12,7 +14,7 @@ namespace TPOS.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    // [Authorize]
+    [Authorize]
     public class BranchController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -24,6 +26,7 @@ namespace TPOS.Api.Controllers
         }
 
         [HttpGet]
+        [Permission(Permissions.Branch.View)]
         public async Task<IActionResult> GetAllBranches()
         {
             var branches = await _unitOfWork.BranchRepository.GetAsync(
@@ -43,6 +46,7 @@ namespace TPOS.Api.Controllers
         }
 
         [HttpGet("Active")]
+        [Permission(Permissions.Branch.View)]
         public async Task<IActionResult> GetActiveBranches()
         {
             var branches = await _unitOfWork.BranchRepository.GetAsync(
@@ -63,6 +67,7 @@ namespace TPOS.Api.Controllers
         }
 
         [HttpGet("{id}")]
+        [Permission(Permissions.Branch.View)]
         public async Task<IActionResult> GetBranchById(int id)
         {
             var branch = await _unitOfWork.BranchRepository.GetSingleAsync(
@@ -82,6 +87,7 @@ namespace TPOS.Api.Controllers
         }
 
         [HttpPost]
+        [Permission(Permissions.Branch.Create)]
         public async Task<IActionResult> AddBranch(BranchRequestDto branchReqDto)
         {
             try
@@ -118,6 +124,7 @@ namespace TPOS.Api.Controllers
         }
 
         [HttpPut("{id}")]
+        [Permission(Permissions.Branch.Modify)]
         public async Task<IActionResult> UpdateBranch(int id, BranchRequestDto branchReqDto)
         {
             if (id != branchReqDto.BranchID || branchReqDto.CompanyID == 0)
@@ -191,6 +198,7 @@ namespace TPOS.Api.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Permission(Permissions.Branch.Delete)]
         public async Task<ActionResult> Delete(int id)
         {
             try

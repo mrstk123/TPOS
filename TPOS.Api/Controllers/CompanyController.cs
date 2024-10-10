@@ -4,12 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 using TPOS.Domain.Entities.Generated;
 using TPOS.Application.Interfaces;
 using TPOS.Infrastructure.Security;
+using TPOS.Application.Constants;
 
 namespace TPOS.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    // [Authorize]
+    [Authorize]
     public class CompanyController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -23,6 +24,7 @@ namespace TPOS.Api.Controllers
         // Use Company entity as parmeters or return types in API methods
 
         [HttpGet]
+        [Permission(Permissions.Company.View)]
         public async Task<IActionResult> GetAllCompanies()
         {
             var companies = await _unitOfWork.CompanyRepository.GetAllAsync();
@@ -30,6 +32,7 @@ namespace TPOS.Api.Controllers
         }
 
         [HttpGet("Active")]
+        [Permission(Permissions.Company.View)]
         public async Task<IActionResult> GetActiveCompanies()
         {
             var companies = await _unitOfWork.CompanyRepository.FindAsync(x => x.Active);
@@ -37,6 +40,7 @@ namespace TPOS.Api.Controllers
         }
 
         [HttpGet("{id}")]
+        [Permission(Permissions.Company.View)]
         public async Task<IActionResult> GetCompanyById(int id)
         {
             var company = await _unitOfWork.CompanyRepository.GetByIdAsync(id);
@@ -48,6 +52,7 @@ namespace TPOS.Api.Controllers
         }
 
         [HttpPost]
+        [Permission(Permissions.Company.Create)]
         public async Task<IActionResult> AddCompany(Company company)
         {
             try
@@ -67,6 +72,7 @@ namespace TPOS.Api.Controllers
         }
 
         [HttpPut("{id}")]
+        [Permission(Permissions.Company.Modify)]
         public async Task<IActionResult> UpdateCompany(int id, Company company)
         {
             if(id != company.CompanyID )
@@ -99,6 +105,7 @@ namespace TPOS.Api.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Permission(Permissions.Company.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             try

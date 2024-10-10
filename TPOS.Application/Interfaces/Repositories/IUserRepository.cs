@@ -8,5 +8,7 @@ namespace TPOS.Application.Interfaces.Repositories
     public interface IUserRepository : IRepository<User>
     {
         //Add any additional specific methods other than the generic ones
+
+        bool HasPermission(int userID, string permissionName);
     }
 }

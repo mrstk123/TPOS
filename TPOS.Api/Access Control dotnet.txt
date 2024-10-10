@@ -146,4 +146,6 @@ Broad Access: If a user role is assigned to a module, they would gain access to 
 not just specific ones. This eliminates the ability to specify that, for example, the "Admin" role can access
 "User Management" but not "Role Management" in the "Security" module.
 
------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------
+Since permissions are already tied to roles, using permission-based authorization alone is enough. You don’t need 
+an additional layer of role-based authorization if all access checks are based on permissions assigned to roles.

@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TPOS.Api.Dtos.Request;
 using TPOS.Api.Dtos.Response;
+using TPOS.Application.Constants;
 using TPOS.Application.Interfaces;
 using TPOS.Domain.Entities.Generated;
 using TPOS.Infrastructure.Security;
@@ -13,7 +15,7 @@ namespace TPOS.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class CustomerController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -25,6 +27,7 @@ namespace TPOS.Api.Controllers
         }
 
         [HttpGet]
+        [Permission(Permissions.Customer.View)]
         public async Task<ActionResult<IEnumerable<CustomerResponseDto>>> GetAllCustomers()
         {
             var customers = await _unitOfWork.CustomerRepository.GetAsync(
@@ -44,6 +47,7 @@ namespace TPOS.Api.Controllers
         }
 
         [HttpGet("Active")]
+        [Permission(Permissions.Customer.View)]
         public async Task<ActionResult<IEnumerable<CustomerResponseDto>>> GetActiveCustomers()
         {
             var customers = await _unitOfWork.CustomerRepository.GetAsync(
@@ -64,6 +68,7 @@ namespace TPOS.Api.Controllers
         }
 
         [HttpGet("{id}")]
+        [Permission(Permissions.Customer.View)]
         public async Task<IActionResult> GetCustomerById(int id)
         {
             var customer = await _unitOfWork.CustomerRepository.GetSingleAsync(
@@ -82,6 +87,7 @@ namespace TPOS.Api.Controllers
         }
 
         [HttpPost]
+        [Permission(Permissions.Customer.Create)]
         public async Task<IActionResult> AddCustomer([FromBody] CustomerRequestDto customerReqDto)
         {
             try
@@ -117,6 +123,7 @@ namespace TPOS.Api.Controllers
         }
 
         [HttpPut("{id}")]
+        [Permission(Permissions.Customer.Modify)]
         public async Task<IActionResult> UpdateCustomer(int id, [FromBody] CustomerRequestDto customerReqDto)
         {
             if (id != customerReqDto.CustomerID || customerReqDto.ContactID == 0)
@@ -172,6 +179,7 @@ namespace TPOS.Api.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Permission(Permissions.Customer.Delete)]
         public async Task<ActionResult> Delete(int id)
         {
             try

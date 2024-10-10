@@ -11,8 +11,8 @@ public partial class Permission
     public int PermissionID { get; set; }
     public string PermissionName { get; set; }
     public string Description { get; set; }
-    public string Value { get; set; }
     public int DisplayOrder { get; set; }
+    public string Value { get; set; }
     public string PermissionModule { get; set; }
     public string PermissionGroup { get; set; }
     public DateTime CreatedOn { get; set; }
